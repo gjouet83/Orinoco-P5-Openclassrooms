@@ -1,0 +1,36 @@
+{
+  "name": "guillaumejouet_5_16042021",
+  "version": "1.0.0",
+  "description": "Orinoco, site de e-commerce proposant à la vente des caméras et appareils photos vintages au meilleur prix.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gjouet83/guillaumejouet_5_16042021.git"
+  },
+  "keywords": [
+    "achat",
+    "de",
+    "caméras",
+    "au",
+    "meilleur",
+    "prix",
+    "apn",
+    "appareil",
+    "photo",
+    "numérique",
+    "vintage",
+    "e-commerce",
+    "vente",
+    "en",
+    "ligne"
+  ],
+  "author": "guillaume jouet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gjouet83/guillaumejouet_5_16042021/issues"
+  },
+  "homepage": "https://github.com/gjouet83/guillaumejouet_5_16042021#readme"
+}
