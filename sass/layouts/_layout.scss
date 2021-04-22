@@ -1,0 +1,19 @@
+
+html {
+    font-size: 16px;
+    font-family: 'Original Surfer';
+    body {
+        margin: 0;
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        @import "./header";
+        @import "./main";
+        @import "./footer";
+    }
+    
+    
+}
+
+

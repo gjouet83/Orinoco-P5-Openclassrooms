@@ -1,0 +1,6 @@
+@mixin font-color ($background-color, $color: black) {
+    @if (lightness($background-color) < 70% ){
+        $color: white;    
+    }
+    color: $color;
+}

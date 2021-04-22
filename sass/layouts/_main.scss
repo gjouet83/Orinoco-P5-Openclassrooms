@@ -1,0 +1,9 @@
+& > main {
+    div {
+        height: 500px;
+    }
+    @media all and (min-width: 768px) {
+        padding-left: 20vw;
+        padding-right: 20vw;
+    }
+}
