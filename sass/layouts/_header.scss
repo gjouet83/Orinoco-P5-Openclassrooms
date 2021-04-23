@@ -7,15 +7,17 @@
 	background-color: $primaryColor;
 	box-shadow: 0px 5px 20px grey;
 	@media all and (min-width: 768px) {
-		padding-left: 15vw;
-		padding-right: 15vw;
+		padding-left: 10vw;
+		padding-right: 10vw;
 		flex-direction: row-reverse;
 	}
     .logo {
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-left: 20px;
         h1 {
+            text-align: center;
             margin-top: 0;
             font-size: 14px;
         }
@@ -24,10 +26,6 @@
 		@media all and (max-width: 768px) {
             position: relative;
 			font-size: 3rem;
-			&:hover > .menu {
-				transition: all 200ms ease-out;
-				transform: translateX(0px);
-			}
 		}
 		.btn-menu {
             padding: 0;
@@ -39,23 +37,35 @@
 				display: none;
 			}
 		}
-		.menu {
-			padding: 10px;
+		#menu {
+			padding: 20px 10px 10px 10px;
 			position: absolute;
+            top: -37px;
+            left: -20px;
 			z-index: 1;
 			font-size: 2rem;
 			background-color: $secondaryColor;
 			box-shadow: -5px 5px 10px grey;
-			border-radius: 15px;
+            border-bottom-right-radius: 10px;
             transition: all 200ms ease-out;
 			transform: translateX(-300px);
+            &:target {
+                transition: all 200ms ease-out;
+				transform: translateX(0px);
+            }
 			ul {
 				margin: 0;
 				padding: 0;
 				list-style: none;
-                li {
+                .btn-close {
+                    padding: 0px 0px 20px 6px;
+                    font-size: 3rem;
+                }
+                a {
+                    @include font-color($backgrounddark);
                     display: flex;
                     justify-content:flex-start;
+                    padding-bottom: 20px;
                     i {
                         @include font-color($backgrounddark);
                         padding-right: 10px;
@@ -65,9 +75,6 @@
                         }
                     }
                 }
-				a {
-					@include font-color($backgrounddark);
-				}
 			}
 			@media all and (min-width: 768px) {
 				position: static;
@@ -78,13 +85,20 @@
 				background-color: transparent;
 				ul {
 					display: flex;
+                    .btn-close {
+                        display: none;
+                    }
 					a {
                         @include font-color($backgroundlight);
 						margin-left: 20px;
 						padding-bottom: 20px;
+                        border: 3px solid transparent;
 						&:hover {
 							border-bottom: 3px solid $secondaryColor;
 						}
+                        i {
+                            @include font-color($backgroundlight);
+                        }
 					}
 				}
 			}
