@@ -8,42 +8,44 @@
     <meta name = "description" content="Orinoco, site de e-commerce proposant à la vente des caméras et appareils photos vintages au meilleur prix." />
     <meta name="keywords" content="achat de caméras au meilleur prix, apn, appareil photo numérique vintage, e-commerce, vente en ligne" />
 
-    <link rel="preload" as="image" href="./img/logomob.png" >
-    <link rel="preload" href="https://kit.fontawesome.com/a5c8cd89c4.js" crossorigin="anonymous" as="script">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" as="style">
-    <link rel="preload" href="./css/style.min.css" as="style">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">    
+    <link rel="preload" href="./img/logomob1.webp" as="image">
+    <link rel="preload" href="./fonts/Roboto-Regular.ttf" crossorigin="anonymous" as="font">
+    <link rel="preload" href="./css/style.min.css" as="style">    
         
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico" />
   
     <link rel="stylesheet" href="./css/style.min.css" />
 
-    <script src="https://kit.fontawesome.com/a5c8cd89c4.js" crossorigin="anonymous"></script>
+    <script defer src="https://kit.fontawesome.com/a5c8cd89c4.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <header>
-      <nav>
-        <a class="btn-menu" href="#menu" aria-label="menu" >
+    <header class="header">
+      <nav class="header__nav">
+        <a class="header__nav__btnMenuOpen" href="#menu" aria-label="menu" >
           <i class="fas fa-bars"></i>
         </a>
-        <span>MENU</span>
-        <div id="menu">
-          <ul>
+        <span class="header__nav__describ">MENU</span>
+        <div class="header__nav__menu" id="menu">
+          <ul class="header__nav__menu__list">
             <li>
-              <a class="btn-close" href="#" aria-label="fermeture du menu">
+              <a class="header__nav__menu__list__btnMenuClose" href="#" aria-label="fermeture du menu">
                 <i class="fas fa-times"></i>
               </a>
             </li>
             <li>
-              <a href="order.html">
+              <a class="header__nav__menu__list__pages" href="index.html">
+                <i class="fas fa-home"></i>
+                Accueil
+              </a>
+            </li>
+            <li>
+              <a class="header__nav__menu__list__pages" href="order.html">
                 <i class="fas fa-clipboard-list"></i>
                 Commande
               </a>
             </li>
             <li>
-              <a href="basket.html">
+              <a class="header__nav__menu__list__pages" href="basket.html">
                 <i class="fas fa-shopping-basket"></i>
                 Panier
               </a>
@@ -51,11 +53,11 @@
           </ul>
         </div>
       </nav>
-      <div class="logo">
+      <div class="header__logo">
         <a href="index.html">
-          <img src="./img/logomob.png" width="200" height="91" alt="logo du site composé d'un caddie à gauche suivi Orinoco en toutes lettres">
+          <img src="./img/logomob1.webp" width="200" height="91" alt="logo du site composé d'un caddie à gauche suivi Orinoco en toutes lettres">
         </a>
-        <h1>
+        <h1 class="header__logo__title">
           Appareils photo vintages au meilleur prix !
         </h1>
       </div>
@@ -66,23 +68,41 @@
       </div>
     </main>
     <footer class="footer">
-      <div class="footer_list">
-        <img src="./img/logowhite.png" width="90" height="22" alt="logo du site">
-        <ul>
-          <li>
+      <ul class="footer__list">
+        <li class="footer__list__logo">
+          <img src="./img/logowhite.png" width="90" height="22" alt="logo du site">
+        </li>
+        <li>
+          <a class="footer__list__elements" href="#">
             Contact
-          </li>
-          <li>
+          </a>
+        </li>
+        <li>
+          <a class="footer__list__elements" href="#">
             À Propos
-          </li>
-        </ul>
+          </a>
+        </li>
+      </ul>
+      <div class="footer__socialNetwork">
+        <a class="footer__socialNetwork__elements" href="https://fr-fr.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="footer__socialNetwork__elements" href="https://twitter.com/?lang=fr" target="_blank" rel="noopener noreferrer" aria-label="twitter">
+          <i class="fab fa-twitter" ></i>
+        </a>
+        <a class="footer__socialNetwork__elements" href="https://fr.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a class="footer__socialNetwork__elements" href="https://www.instagram.com/?hl=fr" target="_blank" rel="noopener noreferrer" aria-label="instagram">
+          <i class="fab fa-instagram" ></i>
+        </a>
       </div>
-      <div class="pay">
-        <i class="fab fa-cc-visa"></i>
-        <i class="fab fa-cc-mastercard"></i>
-        <i class="fab fa-cc-amex"></i>
-        <i class="fab fa-cc-apple-pay"></i>
-        <i class="fab fa-cc-paypal"></i>
+      <div class="footer__pay">
+        <i class="footer__pay__elements fab fa-cc-visa" aria-label="visa"></i>
+        <i class="footer__pay__elements fab fa-cc-mastercard" aria-label="mastercard"></i>
+        <i class="footer__pay__elements fab fa-cc-amex" aria-label="amex"></i>
+        <i class="footer__pay__elements fab fa-cc-apple-pay" aria-label="apple-pay"></i>
+        <i class="footer__pay__elements fab fa-cc-paypal" aria-label="paypal"></i>
       </div>
     </footer>
   </body>

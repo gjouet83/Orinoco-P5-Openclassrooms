@@ -1,4 +1,4 @@
-& > header {
+.header {
 	height: 90px;
 	padding: 10px 20px 20px 20px;
 	display: flex;
@@ -7,28 +7,26 @@
 	background-color: $primaryColor;
 	box-shadow: 0px 5px 20px grey;
 	@media all and (min-width: 768px) {
-		padding-left: 10vw;
-		padding-right: 10vw;
+		padding-left: auto;
+		padding-right: auto;
 		flex-direction: row-reverse;
 	}
-    .logo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 5px;
-        padding-left: 20px;
-        h1 {
-            text-align: center;
-            margin-top: -20px;
-            font-size: 14px;
-        }
-    }
-	nav {
-        position: relative;
-        font-size: 3rem;
-		.btn-menu {
-            padding: 0;
-            height: 48px;
+	&__logo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 5px;
+		&__title {
+			text-align: center;
+			margin-top: -20px;
+			font-size: 14px;
+		}
+	}
+	&__nav {
+		position: relative;
+		font-size: 3rem;
+		&__btnMenuOpen {
+			height: 48px;
 			background-color: transparent;
 			border: none;
 			font-size: 3rem;
@@ -36,54 +34,27 @@
 				display: none;
 			}
 		}
-        span {
-            position: absolute;
-            left: 1px;
-            top: 48px;
-            font-size: 14px;
-            @media all and (min-width: 768px) {
+		&__describ {
+			position: absolute;
+			left: 1px;
+			top: 48px;
+			font-size: 14px;
+			@media all and (min-width: 768px) {
 				display: none;
 			}
-        }
-		#menu {
+		}
+		&__menu {
 			padding: 20px 10px 10px 10px;
 			position: absolute;
-            top: -37px;
-            left: -20px;
+			top: -37px;
+			left: -20px;
 			z-index: 1;
-			font-size: 2rem;
+			font-size: 1.5rem;
 			background-color: $secondaryColor;
 			box-shadow: -5px 5px 10px grey;
-            border-bottom-right-radius: 10px;
-            transition: all 200ms ease-out;
+			border-bottom-right-radius: 10px;
+			transition: all 200ms ease-out;
 			transform: translateX(-300px);
-            &:target {
-                transition: all 200ms ease-out;
-				transform: translateX(0px);
-            }
-			ul {
-				margin: 0;
-				padding: 0;
-				list-style: none;
-                .btn-close {
-                    padding: 0px 0px 20px 6px;
-                    font-size: 3rem;
-                }
-                a {
-                    @include font-color($backgrounddark);
-                    display: flex;
-                    justify-content:flex-start;
-                    padding-bottom: 20px;
-                    i {
-                        @include font-color($backgrounddark);
-                        padding-right: 10px;
-                        &.fa-clipboard-list {
-                            padding-left: 6px;
-                            padding-right: 14px;
-                        }
-                    }
-                }
-			}
 			@media all and (min-width: 768px) {
 				position: static;
 				transform: inherit;
@@ -91,22 +62,52 @@
 				border: none;
 				box-shadow: none;
 				background-color: transparent;
-				ul {
+			}
+			&:target {
+				transition: all 200ms ease-out;
+				transform: translateX(0px);
+			}
+			&__list {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				@media all and (min-width: 768px) {
 					display: flex;
-                    .btn-close {
-                        display: none;
-                    }
-					a {
-                        @include font-color($backgroundlight);
+				}
+				&__btnMenuClose {
+					@include font-color($backgrounddark);
+					display: flex;
+					flex-direction: row-reverse;
+					padding: 0px 0px 20px 6px;
+					font-size: 2rem;
+					@media all and (min-width: 768px) {
+						display: none;
+					}
+				}
+				&__pages {
+					@include font-color($backgrounddark);
+					display: flex;
+					justify-content: flex-start;
+					padding-bottom: 20px;
+					@media all and (min-width: 768px) {
+						@include font-color($backgroundlight);
 						margin-left: 20px;
-						padding-bottom: 20px;
-                        border: 3px solid transparent;
+						padding: 5px 3px 20px 3px;
+						border: 3px solid transparent;
 						&:hover {
 							border-bottom: 3px solid $secondaryColor;
 						}
-                        i {
-                            @include font-color($backgroundlight);
-                        }
+					}
+					i {
+						@include font-color($backgrounddark);
+						padding-right: 10px;
+						@media all and (min-width: 768px) {
+							@include font-color($backgroundlight);
+						}
+						&.fa-clipboard-list {
+							padding-left: 4px;
+							padding-right: 14px;
+						}
 					}
 				}
 			}
