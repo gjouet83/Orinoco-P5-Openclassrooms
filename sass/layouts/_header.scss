@@ -18,6 +18,7 @@
 			text-align: center;
 			margin-top: -20px;
 			font-size: 14px;
+			font-weight: 200;
 		}
 	}
 	&__nav {
@@ -57,7 +58,6 @@
 				position: static;
 				transform: inherit;
 				font-size: 1.5rem;
-				border: none;
 				box-shadow: none;
 				background-color: transparent;
 			}
@@ -91,7 +91,7 @@
 						@include font-color($backgroundlight);
 						margin-left: 20px;
 						padding: 5px 3px 20px 3px;
-						border: 3px solid transparent;
+						border-bottom: 3px solid transparent;
 						&:hover {
 							border-bottom: 3px solid $secondaryColor;
 						}

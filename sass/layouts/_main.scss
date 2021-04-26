@@ -1,9 +1,88 @@
-& > main {
-    div {
-        height: 500px;
+.index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    @media all and (min-width: 768px){
+        margin-left: 8vw;
+        margin-right: 8vw;
     }
-    @media all and (min-width: 768px) {
-        padding-left: 20vw;
-        padding-right: 20vw;
+    &__element {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 20px 10px 20px 10px;
+        border-bottom: 1px solid grey;
+        @media all and (min-width: 768px) {
+            padding-bottom: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            align-items: center;
+        }
+        &__name {
+            grid-column: 2;
+            grid-row: 1;
+            text-align: right;
+            padding-right: 10px;
+            @media all and (min-width: 768px) {
+                align-self: flex-start;
+                grid-column: 3;
+                grid-row: 1;
+                margin-top: 15px;
+                margin-bottom: 0;
+                font-size: 2rem;
+            }
+        }
+        &__picture {
+            grid-column: 1;
+            grid-row: 1 / 4;
+            figure {
+                margin: 8px 0px 0px 10px;
+            }
+            img {
+                border-radius: 7px;
+            }
+        }
+        &__description {
+            grid-column: 1 / 3;
+            grid-row: 4;
+            padding-left: 10px;
+            @media all and (min-width: 768px) {
+                grid-column: 2;
+                grid-row: 1 / 3;
+                font-size: 1.1rem;
+                margin-left: 30px;
+            }
+        }
+        &__price {
+            padding-right: 10px;
+            display: flex;
+            justify-content: flex-end;
+            grid-column: 2;
+            grid-row: 2;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: #DD1E34;
+            @media all and (min-width: 768px) {
+                grid-column: 3;
+                grid-row: 2;
+                align-self: flex-start;
+                font-size: 2rem;
+            }
+        }
+        &__viewProduct {
+            @include font-color ($backgrounddark);
+            grid-column: 2;
+            grid-row: 3;
+            margin-left: 10px;
+            border-radius: 25px;
+            background-color: $secondaryColor;
+            @media all and (min-width: 768px) {
+                width: 50%;
+                margin-left: auto;
+                grid-column: 3;
+                grid-row: 3;
+
+
+            }
+        }
     }
 }
