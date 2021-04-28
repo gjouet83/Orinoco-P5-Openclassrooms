@@ -87,6 +87,10 @@
             margin: 10px 10px 10px 10px;
             border-radius: 25px;
             background-color: $secondaryColor;
+            &:focus {
+                box-shadow: 0px 2px 2px grey;
+                opacity: 60%;
+            }
             @media all and (min-width: 768px) {
                 width: 50%;
                 margin-left: auto;
