@@ -1,0 +1,11 @@
+.btn {
+    @include font-color ($backgrounddark);
+    text-align: center;
+    border-radius: 25px;
+    background-color: $secondaryColor;
+    transition: all 400ms;
+    &:focus, &:hover {
+        box-shadow: 0px 2px 2px grey;
+        opacity: 60%;
+    }
+}
