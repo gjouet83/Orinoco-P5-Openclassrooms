@@ -71,9 +71,47 @@
       </div>
     </header>
     <main>
-      <div>
-
-      </div>
+      <section class="productSheet">
+        <h2 class="productSheet__type">
+          Appareil photo vintage
+        </h2>
+        <h3 class="productSheet__name">
+          Zurss 50
+        </h3>
+        <div class="productSheet__picture">
+          <figure>
+            <img 
+              src="./img/vcam_1_thumbnail.jpg" 
+              width= "203" 
+              height= "135" 
+              alt="appareil photo Zurss 50s"
+            >
+          </figure>
+        </div>
+        <div class="productSheet__description">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div class="productSheet__price">
+          <span class="productSheet__price__value">
+            49900 €
+          </span>
+        </div>
+        <div class="productSheet__option">
+          <label for="lensSelect">
+            Choisissez une optique
+          </label>
+          <select name="lens" id="lensSelect" required>
+            <option value="">--Liste des optiques--</option>
+            <option value="35mm 1.4">35mm 1.4</option>
+            <option value="50mm 1.6">50mm 1.6</option>
+          </select> 
+        </div>
+        <a class="productSheet__addToBasket btn" href="./product.html">
+          Ajouter au panier
+        </a>
+      </section>
     </main>
     <footer class="footer">
       <ul class="footer__list">
