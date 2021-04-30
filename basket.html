@@ -22,7 +22,7 @@
   <body>
     <header class="header">
       <nav class="header__nav">
-        <a class="header__nav__btnMenuOpen" href="#menu" aria-label="menu" >
+        <a class="header__nav__btn" href="#menu" aria-label="menu" >
           <i class="fas fa-bars"></i>
         </a>
         <span class="header__nav__describ">
@@ -71,9 +71,48 @@
       </div>
     </header>
     <main>
-      <div>
-
-      </div>
+      <section class="article">
+        <h2 class="productSheet__type">
+          Appareil photo vintage
+        </h2>
+        <h3 class="productSheet__name">
+          Zurss 50
+        </h3>
+        <div class="productSheet__picture">
+          <figure>
+            <img 
+              src="./img/vcam_1_thumbnail.jpg" 
+              width= "203" 
+              height= "135" 
+              alt="appareil photo Zurss 50s"
+            >
+          </figure>
+        </div>
+        <div class="productSheet__price">
+          <span class="productSheet__price__value">
+            49900 €
+          </span>
+        </div>
+        <form class="chooseQuantity">
+          <label for="quantity">
+            Choisissez une quantié
+          </label>
+          <input 
+            type="number" 
+            name="quantity" 
+            id="quantity" 
+            value="1" 
+            min="1" 
+            required
+          > 
+          <input 
+            type="submit" 
+            id="validateBasket"
+            class="chooseQuantity__validate btn" 
+            name="validateBasket"  
+            value="Valider mon panier" 
+          > 
+        </form>
     </main>
     <footer class="footer">
       <ul class="footer__list">

@@ -1,6 +1,7 @@
 .productSheet {
     padding: 10px;
     display: grid;
+    position: relative;
     grid-template-columns: repeat(2, 1fr);
 
     &__type {
