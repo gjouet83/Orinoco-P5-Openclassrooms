@@ -1,6 +1,6 @@
 .header {
-	height: 90px;
-	padding: 10px 20px 20px 20px;
+	height: 60px;
+	padding: 10px 20px 10px 10px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -12,8 +12,6 @@
 		flex-direction: row-reverse;
 	}
 	&__logo {
-		margin-top: 5px;
-		margin-left: 20px;
 		padding-left: 10px;
 		&__title {
 			text-align: center;
@@ -23,17 +21,23 @@
 		}
 	}
 	&__nav {
+		display: flex;
+		align-items: center;
 		position: relative;
-		font-size: 3rem;
+		font-size: 2rem;
 		&__btn {
+			display: block;
+			width: 48px;
+			height: 48px;
+			text-align: center;
 			@media all and (min-width: 768px) {
 				display: none;
 			}
 		}
 		&__describ {
 			position: absolute;
-			left: 1px;
-			top: 50px;
+			left: 5px;
+			top: 35px;
 			font-size: 14px;
 			@media all and (min-width: 768px) {
 				display: none;
@@ -45,7 +49,7 @@
 			top: -37px;
 			left: -20px;
 			z-index: 1;
-			font-size: 1.5rem;
+			font-size: 1rem;
 			background-color: $secondaryColor;
 			opacity: 90%;
 			box-shadow: -5px 5px 10px grey;
@@ -53,9 +57,10 @@
 			transition: all 200ms ease-out;
 			transform: translateX(-300px);
 			@media all and (min-width: 768px) {
+				padding-top: 30px;
 				position: static;
 				transform: inherit;
-				font-size: 1.5rem;
+				font-size: 1rem;
 				box-shadow: none;
 				background-color: transparent;
 			}
@@ -74,8 +79,8 @@
 					@include font-color($backgrounddark);
 					display: flex;
 					flex-direction: row-reverse;
-					padding: 0px 0px 20px 6px;
-					font-size: 2rem;
+					padding: 10px 0px 20px 6px;
+					font-size: 1.5rem;
 					@media all and (min-width: 768px) {
 						display: none;
 					}
@@ -94,18 +99,26 @@
 						&:hover {
 							border-bottom: 3px solid $secondaryColor;
 						}
+						&:hover i {
+							color: $secondaryColor;
+						}
 					}
 					i {
 						@include font-color($backgrounddark);
+						padding-left: 10px;
 						padding-right: 10px;
 						@media all and (min-width: 768px) {
 							@include font-color($backgroundlight);
 						}
 						&.fa-clipboard-list {
-							padding-left: 4px;
-							padding-right: 14px;
+							padding-left: 13px;
+							padding-right: 11px;
 						}
 					}
+				}
+				&__basket {
+					
+					font-size: 1rem;
 				}
 			}
 		}
