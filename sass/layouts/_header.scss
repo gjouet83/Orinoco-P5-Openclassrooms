@@ -1,9 +1,22 @@
 .header {
-	height: 100px;
+	height: 110px;
+	display: flex;
+	flex-flow: column-reverse;
 	background-color: $primaryColor;
 	box-shadow: 0px 5px 20px grey;
 	@media all and (min-width: 768px) {
-		height: 119px;
+		height: 129px;
+	}
+	&__title {
+		@include font-color($backgrounddark);
+		grid-column: 1 / 4;
+		grid-row: 2;
+		font-size: 1rem;
+		text-align: center;
+		margin: 0;
+		padding-bottom: 5px;
+		padding-top: 5px;
+		background-color: $secondaryColor;
 	}
 	&__nav {
 		display: grid;
@@ -13,17 +26,6 @@
 		}
 		i {
 			font-size: 2rem;
-		}
-		&__title {
-			@include font-color($backgrounddark);
-			grid-column: 1 / 4;
-			grid-row: 2;
-			font-size: 1rem;
-			text-align: center;
-			margin: 0;
-			padding-bottom: 5px;
-			padding-top: 5px;
-			background-color: $secondaryColor;
 		}
 		&__btn {
 			grid-column: 1;
@@ -103,12 +105,8 @@
 						@include font-color($backgrounddark);
 						padding-left: 10px;
 						padding-right: 10px;
-						padding-bottom: 10px;
-						font-size: 1.3rem;
 						@media all and (min-width: 768px) {
 							@include font-color($backgroundlight);
-							padding-bottom: 0px;
-							font-size: 2rem;
 						}
 						&.fa-clipboard-list {
 							padding-left: 13px;
