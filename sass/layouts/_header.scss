@@ -1,50 +1,45 @@
 .header {
-	height: 60px;
-	padding: 10px 20px 10px 10px;
+	height: 110px;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-flow: column-reverse;
 	background-color: $primaryColor;
 	box-shadow: 0px 5px 20px grey;
 	@media all and (min-width: 768px) {
-		padding-left: auto;
-		padding-right: auto;
-		flex-direction: row-reverse;
+		height: 129px;
 	}
-	&__logo {
-		padding-left: 10px;
-		&__title {
-			text-align: center;
-			margin-top: -20px;
-			font-size: 14px;
-			font-weight: 200;
-		}
+	&__title {
+		@include font-color($backgrounddark);
+		grid-column: 1 / 4;
+		grid-row: 2;
+		font-size: 1rem;
+		text-align: center;
+		margin: 0;
+		padding-bottom: 5px;
+		padding-top: 5px;
+		background-color: $secondaryColor;
 	}
 	&__nav {
-		display: flex;
+		display: grid;
 		align-items: center;
-		position: relative;
-		font-size: 2rem;
-		&__btn {
-			display: block;
-			width: 48px;
-			height: 48px;
-			text-align: center;
-			@media all and (min-width: 768px) {
-				display: none;
-			}
+		@media all and (min-width: 768px) {
+			grid-template-columns: 6fr 3fr 1fr;
 		}
-		&__describ {
-			position: absolute;
-			left: 5px;
-			top: 35px;
+		i {
+			font-size: 2rem;
+		}
+		&__btn {
+			grid-column: 1;
+			grid-row: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 			font-size: 14px;
 			@media all and (min-width: 768px) {
 				display: none;
 			}
 		}
 		&__menu {
-			padding: 20px 10px 10px 10px;
+			padding: 20px 20px 10px 0px;
 			position: absolute;
 			top: -37px;
 			left: -20px;
@@ -57,10 +52,12 @@
 			transition: all 200ms ease-out;
 			transform: translateX(-300px);
 			@media all and (min-width: 768px) {
-				padding-top: 30px;
+				grid-column: 2;
+				grid-row: 1;
+				margin-left: auto;
+				padding: 0px;
 				position: static;
 				transform: inherit;
-				font-size: 1rem;
 				box-shadow: none;
 				background-color: transparent;
 			}
@@ -69,8 +66,6 @@
 				transform: translateX(0px);
 			}
 			&__list {
-				margin: 0;
-				padding: 0;
 				list-style: none;
 				@media all and (min-width: 768px) {
 					display: flex;
@@ -89,11 +84,14 @@
 					@include font-color($backgrounddark);
 					display: flex;
 					justify-content: flex-start;
-					padding-bottom: 20px;
+					align-items: baseline;
+					padding-bottom: 10px;
 					@media all and (min-width: 768px) {
 						@include font-color($backgroundlight);
-						margin-left: 20px;
-						padding: 5px 3px 20px 3px;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						margin-left: 30px;
 						border-bottom: 3px solid transparent;
 						transition: all 200ms;
 						&:hover {
@@ -112,14 +110,43 @@
 						}
 						&.fa-clipboard-list {
 							padding-left: 13px;
-							padding-right: 11px;
+							padding-right: 13px;
 						}
 					}
 				}
-				&__basket {
-					
-					font-size: 1rem;
+			}
+		}
+		&__basket {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			grid-column: 3;
+			grid-row: 1;
+			font-size: 14px;
+			@media all and (min-width: 768px) {
+				grid-column: 3;
+				width: 50px;
+				margin-left: 30px;
+				padding-bottom: 10px;
+				border-bottom: 3px solid transparent;
+				transition: all 200ms;
+				&:hover {
+					border-bottom: 3px solid $secondaryColor;
 				}
+				&:hover i {
+					color: $secondaryColor;
+				}
+			}
+		}
+		&__logo {
+			display: flex;
+			justify-content: center;
+			grid-column: 2;
+			grid-row: 1;
+			@media all and (min-width: 768px) {
+				grid-column: 1;
+				margin-right: auto;
+				margin-left: 20px;
 			}
 		}
 	}
