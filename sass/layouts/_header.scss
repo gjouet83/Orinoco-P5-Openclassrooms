@@ -80,7 +80,7 @@
 						display: none;
 					}
 				}
-				&__pages {
+				&__pagesLink {
 					@include font-color($backgrounddark);
 					display: flex;
 					justify-content: flex-start;
@@ -103,17 +103,35 @@
 					}
 					i {
 						@include font-color($backgrounddark);
-						padding-left: 10px;
 						padding-right: 10px;
+						padding-bottom: 10px;
+						font-size: 1.2rem;
 						@media all and (min-width: 768px) {
 							@include font-color($backgroundlight);
+							padding-left: 10px;
+							padding-bottom: 0;
+							font-size: 2rem;
 						}
 						&.fa-clipboard-list {
-							padding-left: 13px;
+							padding-left: 3px;
 							padding-right: 13px;
+							@media all and (min-width:768px) {
+								padding-left: 13px;
+							}
 						}
 					}
 				}
+			}
+		}
+		&__logo {
+			display: flex;
+			justify-content: center;
+			grid-column: 2;
+			grid-row: 1;
+			@media all and (min-width: 768px) {
+				grid-column: 1;
+				margin-right: auto;
+				margin-left: 20px;
 			}
 		}
 		&__basket {
@@ -128,6 +146,7 @@
 				width: 50px;
 				margin-left: 30px;
 				padding-bottom: 10px;
+				font-size: 1rem;
 				border-bottom: 3px solid transparent;
 				transition: all 200ms;
 				&:hover {
@@ -136,17 +155,6 @@
 				&:hover i {
 					color: $secondaryColor;
 				}
-			}
-		}
-		&__logo {
-			display: flex;
-			justify-content: center;
-			grid-column: 2;
-			grid-row: 1;
-			@media all and (min-width: 768px) {
-				grid-column: 1;
-				margin-right: auto;
-				margin-left: 20px;
 			}
 		}
 	}
