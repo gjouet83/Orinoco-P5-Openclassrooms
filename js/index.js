@@ -28,6 +28,7 @@ const creatDiv = () => {
     newPicture.appendChild(newFigure);
     let newImg = document.createElement("img")
     newImg.src = `${camera.imageUrl}`;
+    newImg.alt = `appareil photo ${camera.name}`;
     newFigure.appendChild(newImg);
     let newPrice = document.createElement("div");
     newDiv.appendChild(newPrice);
