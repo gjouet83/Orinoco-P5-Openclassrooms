@@ -1,12 +1,11 @@
 const getPromise = () => {
 	return fetch("http://localhost:3000/api/cameras")
-		.then((res) => {
+		.then(res => {
 			if (res.ok) {
 				return res.json();
 			}
 		})
-		.then((cameras) => {
-			console.log(cameras);
+		.then(cameras => {
 			return cameras;
 		});
 };
@@ -32,6 +31,8 @@ const createPicture = () => {
 	    newPicture.appendChild(newFigure);
 	let newImg = document.createElement("img");
 	    newImg.src = `${camera.imageUrl}`;
+        newImg.width = 203;
+        newImg.height = 135;
 	    newImg.alt = `appareil photo ${camera.name}`;
 	    newFigure.appendChild(newImg);
 };
