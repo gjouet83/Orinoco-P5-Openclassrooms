@@ -1,72 +1,84 @@
-const getPromise = () => {
-	return fetch("http://localhost:3000/api/cameras")
-		.then(res => {
-			if (res.ok) {
-				return res.json();
+/* Déclaration des variables*/
+
+let newDiv = 0;
+
+/* Récupération des données */
+
+const getDatas = () => {
+	fetch("http://localhost:3000/api/cameras")
+		.then(response => {
+			if (response.ok) {
+				return response.json();
 			}
 		})
-		.then(cameras => {
-			return cameras;
+		.then(datas => {
+			createThumbnails(datas);
 		});
 };
 
-let newDiv = 0;
+/* Fonctions créations des composants de la vignette  */
+
 const createDiv = () => {
 	newDiv = document.createElement("div");
 	document.getElementById("productList").appendChild(newDiv);
 	newDiv.classList.add("productList__element");
 };
-const createName = () => {
+
+const createName = (data) => {
 	let newName = document.createElement("h3");
-	    newDiv.appendChild(newName);
-	    newName.classList.add("productList__element__name");
-	let name = document.createTextNode(`${camera.name}`);
-	    newName.appendChild(name);
-};
-const createPicture = () => {
-	let newPicture = document.createElement("div");
-	    newDiv.appendChild(newPicture);
-	    newPicture.classList.add("productList__element__picture");
-	let newFigure = document.createElement("figure");
-	    newPicture.appendChild(newFigure);
-	let newImg = document.createElement("img");
-	    newImg.src = `${camera.imageUrl}`;
-        newImg.width = 203;
-        newImg.height = 135;
-	    newImg.alt = `appareil photo ${camera.name}`;
-	    newFigure.appendChild(newImg);
-};
-const createPrice = () => {
-	let newPrice = document.createElement("div");
-	    newDiv.appendChild(newPrice);
-	    newPrice.classList.add("productList__element__price");
-	let newValue = document.createElement("span");
-	    newPrice.appendChild(newValue);
-	    newValue.classList.add("productList__element__price__value");
-	let value = document.createTextNode(`${camera.price}€`);
-	    newValue.appendChild(value);
-};
-const createBtn = () => {
-	let newButton = document.createElement("a");
-        newButton.setAttribute("href", "./product.html");
-	    newDiv.appendChild(newButton);
-	    newButton.classList.add("productList__element__viewProduct");
-	    newButton.classList.add("btn");
-	let viewProduct = document.createTextNode("Voir le produit");
-	    newButton.appendChild(viewProduct);
-};
-const createThumbnail = () => {
-	createDiv();
-	createName();
-	createPicture();
-	createPrice();
-	createBtn();
-};
-const getCameras = async () => {
-	const cameras = await getPromise();
-	for (camera of cameras) {
-		createThumbnail();
-	}
+	let name = document.createTextNode(data.name);
+	newName.appendChild(name);
+    newDiv.appendChild(newName);
+    newName.classList.add("productList__element__name");
 };
 
-getCameras();
+const createPicture = (data) => {
+	let newPicture = document.createElement("div");
+	let newFigure = document.createElement("figure");
+	let newImg = document.createElement("img");
+	newImg.src = data.imageUrl;
+    newImg.width = 203;
+    newImg.height = 135;
+	newImg.alt = "appareil photo" + (data.name);
+    newPicture.appendChild(newFigure);
+    newDiv.appendChild(newPicture);
+	newFigure.appendChild(newImg);
+    newPicture.classList.add("productList__element__picture");
+};
+
+const createPrice = (data) => {
+	let newPrice = document.createElement("div");
+	let newValue = document.createElement("span");
+	let value = document.createTextNode((data.price)+ "€");
+    newDiv.appendChild(newPrice);
+    newPrice.appendChild(newValue);
+	newValue.appendChild(value);
+    newPrice.classList.add("productList__element__price");
+    newValue.classList.add("productList__element__price__value");    
+};
+
+const createBtn = (data) => {
+	let newButton = document.createElement("a");
+	let viewProduct = document.createTextNode("Voir le produit");
+    newButton.setAttribute("href", "./product.html?"+(data._id));
+    newDiv.appendChild(newButton);
+	newButton.appendChild(viewProduct);
+    newButton.classList.add("productList__element__viewProduct");
+	newButton.classList.add("btn");
+};
+
+/* Fonction création de la vignette */
+
+const createThumbnails = (datas) => {
+    for (let data of datas) {
+        createDiv();
+        createName(data);
+        createPicture(data);
+        createPrice(data);
+        createBtn(data);
+    }
+};
+
+/* Fonction Principales */
+
+getDatas();
