@@ -1,9 +1,14 @@
-/* Déclaration des variables*/
-
+// Déclaration des variables
 let newDiv = 0;
 
-/* Récupération des données */
+// Création de l'objet pour le formatage du prix
+let formatPrice = new Intl.NumberFormat("fr-FR", {
+	style: "currency",
+	currency: "EUR",
+	currencyDisplay: "symbol",
+});
 
+//Récupération des données 
 const getDatas = () => {
 	fetch("http://localhost:3000/api/cameras")
 		.then(response => {
@@ -13,11 +18,11 @@ const getDatas = () => {
 		})
 		.then(datas => {
 			createThumbnails(datas);
+            console.log(datas);
 		});
 };
 
-/* Fonctions créations des composants de la vignette  */
-
+// Fonctions créations des composants de la vignette 
 const createDiv = () => {
 	newDiv = document.createElement("div");
 	document.getElementById("productList").appendChild(newDiv);
@@ -49,7 +54,7 @@ const createPicture = (data) => {
 const createPrice = (data) => {
 	let newPrice = document.createElement("div");
 	let newValue = document.createElement("span");
-	let value = document.createTextNode((data.price)+ "€");
+	let value = document.createTextNode(formatPrice.format(data.price /100));
     newDiv.appendChild(newPrice);
     newPrice.appendChild(newValue);
 	newValue.appendChild(value);
@@ -67,8 +72,7 @@ const createBtn = (data) => {
 	newButton.classList.add("btn");
 };
 
-/* Fonction création de la vignette */
-
+// Fonction création de la vignette
 const createThumbnails = (datas) => {
     for (let data of datas) {
         createDiv();
@@ -79,6 +83,5 @@ const createThumbnails = (datas) => {
     }
 };
 
-/* Fonction Principales */
-
+//Fonction Principales 
 getDatas();

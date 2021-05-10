@@ -9,7 +9,6 @@
     <meta name="keywords" content="achat de caméras au meilleur prix, apn, appareil photo numérique vintage, e-commerce, vente en ligne" />
 
     <link rel="preload" href="./img/logomob.jpg" as="image">
-    <link rel="preload" href="./img/vcam_1_thumbnail.jpg" as="image">
     <link rel="preload" href="./fonts/Roboto-Regular.ttf" crossorigin="anonymous" as="font">
     <link rel="preload" href="./fonts/Roboto-Black.ttf" crossorigin="anonymous" as="font">
     <link rel="preload" href="./fonts/Roboto-BlackItalic.ttf" crossorigin="anonymous" as="font">
@@ -20,6 +19,7 @@
     <link rel="stylesheet" href="./css/style.min.css" />
 
     <script defer src="https://kit.fontawesome.com/a5c8cd89c4.js" crossorigin="anonymous"></script>
+    <script defer src="./js/basket.js"></script>
   </head>
   <body>
     <header class="header">
@@ -69,48 +69,47 @@
       </nav>
     </header>
     <main>
-      <section class="article">
-        <h2 class="productSheet__type">
-          Appareil photo vintage
-        </h2>
-        <h3 class="productSheet__name">
-          Zurss 50
-        </h3>
-        <div class="productSheet__picture">
-          <figure>
-            <img 
-              src="./img/vcam_1_thumbnail.jpg" 
-              width= "203" 
-              height= "135" 
-              alt="appareil photo Zurss 50s"
-            >
-          </figure>
-        </div>
-        <div class="productSheet__price">
-          <span class="productSheet__price__value">
-            49900 €
-          </span>
-        </div>
-        <form class="chooseQuantity">
-          <label for="quantity">
-            Choisissez une quantié
+      <section class="basket" id="basket">
+        <div class="basket__element">
+          <h2 class="basket__element__productName" >
+            Zurss 50
+          </h2>
+          <label class="basket__element__quantityLabel" for="quantity">
+            Quantié
           </label>
           <input 
+            class="basket__element__quantityInput"
             type="number" 
             name="quantity" 
             id="quantity" 
             value="1" 
             min="1" 
             required
-          > 
-          <input 
-            type="submit" 
-            id="validateBasket"
-            class="chooseQuantity__validate btn" 
-            name="validateBasket"  
-            value="Valider mon panier" 
-          > 
-        </form>
+          >
+          <span class="basket__element__lensLabel">
+            Optique
+          </span>
+          <span class="basket__element__productLens">
+    
+          </span>
+          <span class="basket__element__priceLabel">
+            Prix
+          </span>
+          <span class="basket__element__productPrice">
+            49900 €
+          </span> 
+          <a class="basket__element__productDelete" href="#">
+            Supprimer
+          </a>
+        </div>
+      </section>  
+      <input 
+      type="submit" 
+      id="validateBasket"
+      class="basket__validate btn" 
+      name="validateBasket"  
+      value="Valider mon panier" 
+      > 
     </main>
     <footer class="footer">
       <ul class="footer__list">
