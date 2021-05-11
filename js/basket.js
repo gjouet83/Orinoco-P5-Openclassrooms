@@ -20,29 +20,15 @@ const createDiv = () => {
 	newDiv.classList.add("basket__element");
 };
 
-const createQuantityLabel = () => {
+const createQuantityLabel = (object) => {
     let newQuantityLabel = document.createElement("label");
     let quantityLabel = document.createTextNode("Quantité");
     newQuantityLabel.appendChild(quantityLabel);
     newDiv.appendChild(newQuantityLabel);
     newQuantityLabel.classList.add("basket__element__quantityLabel");
+    newQuantityLabel.setAttribute("for", "quantity" + (object.objectId))
 }
 
-const createLensLabel = () => {
-    let newLensLabel = document.createElement("span");
-    let lensLabel = document.createTextNode("Optique");
-    newLensLabel.appendChild(lensLabel);
-    newDiv.appendChild(newLensLabel);
-    newLensLabel.classList.add("basket__element__lensLabel"); 
-}
-
-const createLens = (object) => {
-    let newLens = document.createElement("span");
-    let lens = document.createTextNode(object.objectOption);
-    newLens.appendChild(lens);
-    newDiv.appendChild(newLens);
-    newLens.classList.add("basket__element__productLens");
-}
 const createName = (object) => {
 	let newName = document.createElement("h2");
 	let name = document.createTextNode(object.objectName);
@@ -78,13 +64,11 @@ const creatProductDelete = () => {
 //création de la vignette avec tous le éléments
 const createThumbnails = (object) => {
     createDiv();
-    createQuantityLabel();
+    createQuantityLabel(object);
     createPriceLabel();
-    createLensLabel();
     creatProductDelete();
     createName(object);
     createPrice(object);
-    createLens(object);
 };
 
 // fonction principale

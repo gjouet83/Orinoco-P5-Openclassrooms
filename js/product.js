@@ -69,23 +69,15 @@ const insertElements = (datas) => {
 	insertDescription(datas);
 	insertPrice(datas);
 	insertOption(datas);
-	getLens(datas);
-};
-
-// on enregistre l'optique sélectionnée dans une variable
-const getLens = (datas) => {
-    document.getElementById("lensSelect").addEventListener("change", function() {
-        let selectedLens = this.value;
-        createObject(datas, selectedLens);
-    });
+	createObject(datas);
 };
 
 // on crée un objet contenant les valeurs indispensables au panier dont l'optique précédemment sélectionnée
-const createObject = (datas, selectedLens) => {
+const createObject = (datas) => {
     let object  = {
 		objectName: datas.name,
 		objectPrice: datas.price / 100,
-        objectOption: selectedLens,
+        objectId: datas._id, 
 		objectQuantity: 1,
 	};
 	addToBasket(object);
@@ -105,7 +97,7 @@ const addToBasket = (object) => {
 			} else {
 				basket.push(object);
                 for (object of basket) {
-                    if (object.objectName === object.objectName && object.objectOption === object.objectOption) {
+                    if (object.objectName === object.objectName) {
                         console.log("test");
                     }
                 }
