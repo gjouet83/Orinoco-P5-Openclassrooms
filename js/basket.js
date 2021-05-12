@@ -24,7 +24,7 @@ const createQuantityLabel = (object) => {
     newQuantityLabel.appendChild(quantityLabel);
     newDiv.appendChild(newQuantityLabel);
     newQuantityLabel.classList.add("basket__element__quantityLabel");
-    newQuantityLabel.setAttribute("for", "quantity" + (object.objectId))
+    newQuantityLabel.setAttribute("for", "quantity" + (object.id))
 }
 
 const creatQuantityInput = (object) => {
@@ -32,8 +32,8 @@ const creatQuantityInput = (object) => {
     newDiv.appendChild(newQuantityInput);
     newQuantityInput.setAttribute("type", "number");
     newQuantityInput.setAttribute("name", "quantity"); 
-    newQuantityInput.setAttribute("id", "quantity" + (object.objectId));
-    newQuantityInput.setAttribute("value", (localStorage.getItem("quantity" + object.objectId))); 
+    newQuantityInput.setAttribute("id", "quantity" + (object.id));
+    newQuantityInput.setAttribute("value", (localStorage.getItem("quantity" + object.id))); 
     newQuantityInput.setAttribute( "min", "1");
     newQuantityInput.setAttribute("requierd", "true");
     newQuantityInput.classList.add("basket__element__quantityInput");
@@ -42,8 +42,8 @@ const creatQuantityInput = (object) => {
 const createName = (object) => {
 	let newName = document.createElement("h2");
     let linkToReturn = document.createElement("a");
-	let name = document.createTextNode(object.objectName);
-    linkToReturn.setAttribute("href", "./product.html?"+(object.objectId));
+	let name = document.createTextNode(object.name);
+    linkToReturn.setAttribute("href", "./product.html?"+(object.id));
     newDiv.appendChild(newName);
     newName.appendChild(linkToReturn);
     linkToReturn.appendChild(name);
@@ -61,9 +61,9 @@ const createPriceLabel = () => {
 const createPrice = (object) => {
 	let newPrice = document.createElement("span");
     newDiv.appendChild(newPrice);
-    newPrice.setAttribute("id", "price" + object.objectId)
+    newPrice.setAttribute("id", "price" + object.id)
     newPrice.classList.add("basket__element__productPrice"); 
-    document.getElementById("price" + object.objectId).textContent = formatPrice.format(localStorage.getItem("price" + object.objectId)); 
+    document.getElementById("price" + object.id).textContent = formatPrice.format(localStorage.getItem("price" + object.id)); 
 };
 
 const createProductDelete = () => {
@@ -90,13 +90,13 @@ const createThumbnails = (object) => {
 
 // augmentation du prix en fonction de la quantité
 const majPrice = (object) => {
-    document.getElementById("quantity" + (object.objectId)).addEventListener("change", function(){
-        object.objectQuantity = this.value;
-        localStorage.setItem("quantity" + object.objectId, object.objectQuantity);
-        let majQuantity = localStorage.getItem("quantity" + object.objectId);
-        let majPrice = localStorage.getItem("price" + object.objectId);
-        majPrice = majQuantity * object.objectPrice;
-        localStorage.setItem("price" + object.objectId, majPrice);
+    document.getElementById("quantity" + (object.id)).addEventListener("change", function(){
+        object.quantity = this.value;
+        localStorage.setItem("quantity" + object.id, object.quantity);
+        let majQuantity = localStorage.getItem("quantity" + object.id);
+        let majPrice = localStorage.getItem("price" + object.id);
+        majPrice = majQuantity * object.price;
+        localStorage.setItem("price" + object.id, majPrice);
         createPrice(object);
     })
 }

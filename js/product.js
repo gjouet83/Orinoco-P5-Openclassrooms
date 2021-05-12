@@ -75,11 +75,10 @@ const insertElements = (datas) => {
 // on crée un objet contenant les valeurs indispensables au panier dont l'optique précédemment sélectionnée
 const createObject = (datas) => {
     let object  = {
-		objectName: datas.name,
-		objectPrice: datas.price / 100,
-        objectId: datas._id, 
-		objectQuantity: 1,
-        totalPrice: datas.price / 100,
+		name: datas.name,
+		price: datas.price / 100,
+        id: datas._id, 
+		quantity: 1,
 	};
 	addToBasket(object);
 };
@@ -94,23 +93,23 @@ const addToBasket = (object) => {
 				let basket = []; // on crée un panier
 				basket.push(object); // on lui ajoute l'objet
 				localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
-                localStorage.setItem("quantity" + object.objectId, object.objectQuantity);//on stocke la quantité
-                localStorage.setItem("price" + object.objectId, object.objectPrice);//on stocke le prix
+                localStorage.setItem("quantity" + object.id, object.quantity);//on stocke la quantité
+                localStorage.setItem("price" + object.id, object.price);//on stocke le prix
 				console.log(basket);
 			} else {
-                let testQuantity = localStorage.getItem("quantity" + object.objectId);
+                let testQuantity = localStorage.getItem("quantity" + object.id);
                 if (testQuantity) {// on check si une quantité est déjà présente
-                    let updateQuantity = localStorage.getItem("quantity" + object.objectId);
+                    let updateQuantity = localStorage.getItem("quantity" + object.id);
                     updateQuantity++;//on ajoute un à la quantité
-                    let updatePrice = localStorage.getItem("price" + object.objectId);
-                    updatePrice = updateQuantity * object.objectPrice;
-                    localStorage.setItem("price" + object.objectId, updatePrice);// on mets a jour la prix
-                    localStorage.setItem("quantity" + object.objectId, updateQuantity);// on mets a jour la quantité
+                    let updatePrice = localStorage.getItem("price" + object.id);
+                    updatePrice = updateQuantity * object.price;
+                    localStorage.setItem("price" + object.id, updatePrice);// on mets a jour la prix
+                    localStorage.setItem("quantity" + object.id, updateQuantity);// on mets a jour la quantité
                 }else {
                     basket.push(object); // on lui ajoute l'objet
                     localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
-                    localStorage.setItem("quantity" + object.objectId, object.objectQuantity);// on mets a jour la prix
-                    localStorage.setItem("price" + object.objectId, object.objectPrice);// on mets a jour la quantité
+                    localStorage.setItem("quantity" + object.id, object.quantity);// on mets a jour la prix
+                    localStorage.setItem("price" + object.id, object.price);// on mets a jour la quantité
                 }
 			}
 		});
