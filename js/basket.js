@@ -14,8 +14,6 @@ const getObject = () => {
         for (object of basket) {
             majQuantity(basket);
             createThumbnails(object);
-            
-            
         }
     }
 }

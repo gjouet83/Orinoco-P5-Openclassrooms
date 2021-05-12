@@ -94,15 +94,24 @@ const addToBasket = (object) => {
 				let basket = []; // on crée un panier
 				basket.push(object); // on lui ajoute l'objet
 				localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
-                localStorage.setItem("quantity" + object.objectId, object.objectQuantity);
-                localStorage.setItem("price" + object.objectId, object.objectPrice);
+                localStorage.setItem("quantity" + object.objectId, object.objectQuantity);//on stocke la quantité
+                localStorage.setItem("price" + object.objectId, object.objectPrice);//on stocke le prix
 				console.log(basket);
 			} else {
-				basket.push(object);
-				localStorage.setItem("basket", JSON.stringify(basket));
-                localStorage.setItem("quantity" + object.objectId, object.objectQuantity);
-                localStorage.setItem("price" + object.objectId, object.objectPrice);
-				console.log(basket);
+                let testQuantity = localStorage.getItem("quantity" + object.objectId);
+                if (testQuantity) {// on check si une quantité est déjà présente
+                    let updateQuantity = localStorage.getItem("quantity" + object.objectId);
+                    updateQuantity++;//on ajoute un à la quantité
+                    let updatePrice = localStorage.getItem("price" + object.objectId);
+                    updatePrice = updateQuantity * object.objectPrice;
+                    localStorage.setItem("price" + object.objectId, updatePrice);// on mets a jour la prix
+                    localStorage.setItem("quantity" + object.objectId, updateQuantity);// on mets a jour la quantité
+                }else {
+                    basket.push(object); // on lui ajoute l'objet
+                    localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
+                    localStorage.setItem("quantity" + object.objectId, object.objectQuantity);// on mets a jour la prix
+                    localStorage.setItem("price" + object.objectId, object.objectPrice);// on mets a jour la quantité
+                }
 			}
 		});
 };
