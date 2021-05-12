@@ -12,7 +12,6 @@ const getObject = () => {
         console.log("vide");
     }else {
         for (object of basket) {
-            majQuantity(basket);
             createThumbnails(object);
         }
     }
@@ -86,7 +85,6 @@ const createThumbnails = (object) => {
     createPriceLabel();
     createPrice(object);
     createProductDelete();
-    majQuantity(basket);
     majPrice(object);
 };
 
@@ -104,16 +102,6 @@ const majPrice = (object) => {
 }
 
 //fonction delete 
-const majQuantity = (basket) => {
-    console.log(basket);
-    for (i=0; i < basket.length; i++) {
-        if(basket[i] === basket[i + 1]) {
-            console.log("test");
-            basket[i].objectQuantity = basket[i].objectQuantity + 1;
-            console.log(basket[i].objectQuantity); 
-        }
-    }
 
-}
 // fonction principale
 getObject();
