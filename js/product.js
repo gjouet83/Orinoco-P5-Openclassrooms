@@ -79,6 +79,7 @@ const createObject = (datas) => {
 		objectPrice: datas.price / 100,
         objectId: datas._id, 
 		objectQuantity: 1,
+        totalPrice: datas.price / 100,
 	};
 	addToBasket(object);
 };
@@ -93,15 +94,14 @@ const addToBasket = (object) => {
 				let basket = []; // on crée un panier
 				basket.push(object); // on lui ajoute l'objet
 				localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
+                localStorage.setItem("quantity" + object.objectId, object.objectQuantity);
+                localStorage.setItem("price" + object.objectId, object.objectPrice);
 				console.log(basket);
 			} else {
 				basket.push(object);
-                for (object of basket) {
-                    if (object.objectName === object.objectName) {
-                        console.log("test");
-                    }
-                }
 				localStorage.setItem("basket", JSON.stringify(basket));
+                localStorage.setItem("quantity" + object.objectId, object.objectQuantity);
+                localStorage.setItem("price" + object.objectId, object.objectPrice);
 				console.log(basket);
 			}
 		});

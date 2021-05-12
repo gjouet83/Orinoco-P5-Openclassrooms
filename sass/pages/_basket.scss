@@ -3,7 +3,7 @@
         display: grid;
         justify-items: center;
         align-items: center;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(5, 0.3fr);
         margin: 10px;
         padding: 5px;
@@ -18,7 +18,7 @@
         &__productName {
             display: block;
             width: 100%;
-            grid-column: 1 / 5;
+            grid-column: 1 / 3;
             grid-row: 1;
             margin: 0;
             text-align: center;
@@ -50,27 +50,8 @@
                 grid-row: 2;
             }
         }
-        &__lensLabel {
-            grid-column: 2;
-            grid-row: 3;
-            font-family: "Roboto-Black";
-            font-style: italic;
-            @media all and (min-width: 768px) {
-                grid-column: 3;
-                grid-row: 1;
-            }
-        }
-        &__productLens {
-            grid-column: 2;
-            grid-row: 5; 
-            @media all and (min-width: 768px) {
-                grid-column: 3;
-                grid-row: 3;
-                align-self: flex-start;
-            }
-        }
         &__priceLabel {
-            grid-column: 3 / 5;
+            grid-column: 2;
             grid-row: 3;
             font-family: "Roboto-Black";
             font-style: italic;
@@ -80,7 +61,7 @@
             }
         }
         &__productPrice {
-            grid-column: 3 / 5;
+            grid-column: 2;
             grid-row: 5;
             align-self: flex-start;
             font-family: "Roboto-Black";
