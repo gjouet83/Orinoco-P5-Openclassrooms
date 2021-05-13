@@ -52,8 +52,7 @@ const insertPrice = (datas) => {
 
 const insertOption = (datas) => {
 	let lenses = datas.lenses; //on recupère le tableau des lentilles
-	for (lens of lenses) {
-		// boucle qui parcours le tableau des lentilles
+	for (lens of lenses) {// boucle qui parcours le tableau des lentilles
 		let lensSelect = document.getElementById("lensSelect");
 		let newLens = document.createElement("option");
 		newLens.value = lens;
@@ -91,6 +90,7 @@ const createObject = (datas, selectedLens) => {
 		option: selectedLens,
 	};
 	addToBasket(object);
+	console.log(object);
 };
 
 // Ajout au panier
@@ -100,7 +100,7 @@ const addToBasket = (object) => {
 		.getElementById("addToBasket")
 		.addEventListener("click", function () {
 			if (!basket) {
-				//on verifie qu'il n'existe pas de panier
+				console.log("test")    //on verifie qu'il n'existe pas de panier
 				let basket = []; // on crée un panier
 				basket.push(object); // on lui ajoute l'objet
 				localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
