@@ -20,6 +20,7 @@
 
     <script defer src="https://kit.fontawesome.com/a5c8cd89c4.js" crossorigin="anonymous"></script>
     <script defer src="./helpers/dom.js"></script>
+    <script defer src="./helpers/basketChip.js"></script>
     <script defer src="./js/basket.js"></script>
   </head>
   <body>
@@ -68,7 +69,7 @@
             <i class="fas fa-shopping-basket"></i>
             Panier
           </a>
-          <div class="header__nav__basket__chip">
+          <div class="header__nav__basket--chip">
             <span>
             </span>
           </div>
@@ -77,6 +78,10 @@
     </header>
     <main>
       <section class="basket" id="basket">
+        <div class="basket__empty">
+          <i class="fas fa-shopping-cart"></i>
+          <span>c'est vide ici !</span>
+        </div>
       </section>  
       <input 
       type="submit" 

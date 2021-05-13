@@ -1,4 +1,13 @@
 .basket {
+    &__empty {
+        @include column-center;
+        align-items: center;
+        height: 80vh;
+        font-size: 30px;
+        .fas {
+            font-size: 150px;
+        }
+    }
     &__element {
         display: grid;
         justify-items: center;
@@ -117,9 +126,5 @@
     }
     &__validate {
         display: block;
-        width: 300px;
-        margin: 20px auto 30px auto;
-        line-height: 40px;
-        font-size: 1.5rem;
     }
 }

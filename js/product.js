@@ -26,11 +26,11 @@ const searchCamera = (id) => {
 };
 
 //fonctions insertion des composants de la page produit
-const insertName = (datas) => {
+const insertName = (datas) => { // nom de l'apn
 	document.getElementById("name").textContent = datas.name;
 };
 
-const insertPicture = (datas) => {
+const insertPicture = (datas) => {  // photo du produit
 	let picture = document.getElementById("picture");
 	let newImg = document.createElement("img");
 	newImg.src = datas.imageUrl;
@@ -40,19 +40,19 @@ const insertPicture = (datas) => {
 	picture.appendChild(newImg);
 };
 
-const insertDescription = (datas) => {
+const insertDescription = (datas) => { // description du produit
 	document.getElementById("description").textContent = datas.description;
 };
 
-const insertPrice = (datas) => {
+const insertPrice = (datas) => { // prix du produit
 	document.getElementById("value").textContent = formatPrice.format(
 		datas.price / 100
 	);
 };
 
-const insertOption = (datas) => {
-	let lenses = datas.lenses; //on recupère le tableau des lentilles
-	for (lens of lenses) {// boucle qui parcours le tableau des lentilles
+const insertOption = (datas) => { // optiques
+	let lenses = datas.lenses; //on recupère le tableau des optiques
+	for (lens of lenses) {// boucle qui parcours le tableau des optiques
 		let lensSelect = document.getElementById("lensSelect");
 		let newLens = document.createElement("option");
 		newLens.value = lens;
@@ -89,8 +89,7 @@ const createObject = (datas, selectedLens) => {
 		quantity: 1,
 		option: selectedLens,
 	};
-	addToBasket(object);
-	console.log(object);
+	addToBasket(object); // on passe l'objet a la fonction ajout au panier
 };
 
 // Ajout au panier
@@ -99,34 +98,34 @@ const addToBasket = (object) => {
 	document
 		.getElementById("addToBasket")
 		.addEventListener("click", function () {
-			if (!basket) {
-				console.log("test")    //on verifie qu'il n'existe pas de panier
+			if (!basket) {    //on verifie qu'il n'existe pas de panier
 				let basket = []; // on crée un panier
 				basket.push(object); // on lui ajoute l'objet
 				localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
-				updateBasketChip();
 			} else {
 				basket.push(object);
 				localStorage.setItem("basket", JSON.stringify(basket));
-				find(basket);
+				find(basket); // on passe le panier a la fonction de recherche des produits en double
 			}
-			updateBasketChip();
+			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 		});
 };
 
+// fonction de recherche et élimination des doublons. On augmente le produit restant de 1 quantité 
 const find = (basket) => {
-	for (i = 1; i < basket.length; i++) {
+	for (i = 0; i < basket.length - 1; i++) {
 		if (
-			basket[basket.length - 1].id === basket[i - 1].id &&
-			basket[basket.length - 1].option === basket[i - 1].option
+			basket[basket.length - 1].id === basket[i].id &&
+			basket[basket.length - 1].option === basket[i].option /* on compare le dernier produit avec l'avant dernier ainsi que l'optique
+																	 pour ne pas additionner des produit avec des optiques différentes */
 		) {
-			basket[i - 1].quantity++;
-			basket.pop();
-			localStorage.setItem("basket", JSON.stringify(basket));
+			basket[i].quantity++; // on incrémente la quantité du produit trouvé de 1
+			basket.pop(); // on supprime le dernier produit
+			localStorage.setItem("basket", JSON.stringify(basket)); // on stocke le tableau
 		}
 	}
 };
 
 //Fonctions Principales
-updateBasketChip();
+updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 getproductId();

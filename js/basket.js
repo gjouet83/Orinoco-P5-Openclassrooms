@@ -5,18 +5,23 @@ let formatPrice = new Intl.NumberFormat("fr-FR", {
 	currencyDisplay: "symbol",
 });
 
-// récupération des objets du tableau dans le localstorage
+/* suppression du boutton de validation quand le panier et vide,
+suppression du background panier vide,
+récupération des objets du tableau contenant les ids, quantité et choix de l'optique dans le localstorage*/
 const getObject = () => {
     let basket = JSON.parse(localStorage.getItem("basket"));
     if (!basket) {
         document.getElementById("validateBasket").remove();
-        console.log("vide");
+    }else {
+        let vanishEmptyBasket = document.querySelector(".basket__empty");
+        vanishEmptyBasket.style.display = "none";
     }
     for (object of basket) {
         searchCamera(object.id, object.quantity, object.option);
     }
 }
 
+// recupération des infos des apn sur le backend
 const searchCamera = (id, quantity, option) => {
 	fetch("http://localhost:3000/api/cameras/" + id)
 		.then((response) => {
@@ -25,12 +30,12 @@ const searchCamera = (id, quantity, option) => {
 			}
 		})
 		.then((datas) => {
-			createThumbnails(datas, quantity, option);
+			createThumbnails(datas, quantity, option); // on passe les info a la fonction qui appelle les fonctions de création de vignettes
 		});
 };
 
-// création des éléments de la vignette
-const createQuantityLabel = () => {
+/* ---------création des éléments de la vignette---------- */
+const createQuantityLabel = () => {  // titre pour la quantité d'apn
     let newQuantityLabel = document.createElement("label");
     let quantityLabel = document.createTextNode("Qté");
     newQuantityLabel.appendChild(quantityLabel);
@@ -38,7 +43,7 @@ const createQuantityLabel = () => {
     newQuantityLabel.classList.add("basket__element__quantityLabel");
 }
 
-const createQuantityInput = (object, quantity) => {
+const createQuantityInput = (object, quantity) => { // champ de saisie de la quantité d'apn
     let newQuantityInput = document.createElement("input");
     newDiv.appendChild(newQuantityInput);
     newQuantityInput.setAttribute("type", "number");
@@ -50,7 +55,7 @@ const createQuantityInput = (object, quantity) => {
     newQuantityInput.classList.add("basket__element__quantityInput");
 }
 
-const createLensLabel = () => {
+const createLensLabel = () => {  // titre pour l'optique
     let newLensLabel = document.createElement("span");
     let lensLabel = document.createTextNode("Optique");
     newLensLabel.appendChild(lensLabel);
@@ -58,7 +63,7 @@ const createLensLabel = () => {
     newLensLabel.classList.add("basket__element__lensLabel"); 
 }
 
-const createLens = (option) => {
+const createLens = (option) => {  // optique choisie
     let newLens = document.createElement("span");
     let lens = document.createTextNode(option);
     newLens.appendChild(lens);
@@ -66,7 +71,7 @@ const createLens = (option) => {
     newLens.classList.add("basket__element__productLens");
 }
 
-const createName = (object) => {
+const createName = (object) => {  // nom de l'apn
 	let newName = document.createElement("h2");
     let linkToReturn = document.createElement("a");
 	let name = document.createTextNode(object.name);
@@ -77,7 +82,7 @@ const createName = (object) => {
     newName.classList.add("basket__element__productName");
 };
 
-const createPriceLabel = () => {
+const createPriceLabel = () => { // titre pour le prix de l'apn
     let newPriceLabel = document.createElement("span");
     let priceLabel = document.createTextNode("Prix");
     newPriceLabel.appendChild(priceLabel);
@@ -85,7 +90,7 @@ const createPriceLabel = () => {
     newPriceLabel.classList.add("basket__element__priceLabel"); 
 }
 
-const createPrice = (object, quantity) => {
+const createPrice = (object, quantity) => { // prix de l'apn
 	let newPrice = document.createElement("span");
     object.price *= quantity;
 	let price = document.createTextNode(formatPrice.format(object.price / 100));
@@ -95,7 +100,7 @@ const createPrice = (object, quantity) => {
     newPrice.classList.add("basket__element__productPrice");   
 };
 
-const createProductDelete = (object) => {
+const createProductDelete = (object) => { // boutton de suppression du produit version desktop
     let newProductDelete = document.createElement("button");
     let productDelete = document.createTextNode("Supprimer");
     newProductDelete.appendChild(productDelete);
@@ -104,7 +109,7 @@ const createProductDelete = (object) => {
     newProductDelete.setAttribute("id", "productDelete" + object._id); 
 }
 
-const createDeleteIcon = (object) => {
+const createDeleteIcon = (object) => {  // boutton de suppression du produit version mobile
     let newProductDelete = document.createElement("button");
     let deleteIcon = document.createElement("i");
     newProductDelete.appendChild(deleteIcon);
@@ -117,7 +122,7 @@ const createDeleteIcon = (object) => {
 
 //création de la vignette avec tous le éléments
 const createThumbnails = (object , quantity, option) => {
-    createDiv("basket", "basket__element");
+    createDiv("basket", "basket__element"); // => helpers dom.js
     createQuantityLabel();
     createQuantityInput(object, quantity);
     createPriceLabel();
@@ -151,5 +156,5 @@ const deleteItem = (object, option) => {
 }
 
 // fonctions principales
-updateBasketChip();
+updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 getObject();
