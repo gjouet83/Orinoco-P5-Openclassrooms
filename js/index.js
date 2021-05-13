@@ -78,5 +78,6 @@ const createThumbnails = (datas) => {
     }
 };
 
-//Fonction Principales 
+//Fonctions Principales
+updateBasketChip(); 
 getDatas();

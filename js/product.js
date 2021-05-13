@@ -52,7 +52,8 @@ const insertPrice = (datas) => {
 
 const insertOption = (datas) => {
 	let lenses = datas.lenses; //on recupère le tableau des lentilles
-	for (lens of lenses) {// boucle qui parcours le tableau des lentilles
+	for (lens of lenses) {
+		// boucle qui parcours le tableau des lentilles
 		let lensSelect = document.getElementById("lensSelect");
 		let newLens = document.createElement("option");
 		newLens.value = lens;
@@ -69,16 +70,25 @@ const insertElements = (datas) => {
 	insertDescription(datas);
 	insertPrice(datas);
 	insertOption(datas);
-	createObject(datas);
+	getLens(datas);
+};
+
+// on enregistre l'optique sélectionnée dans une variable
+const getLens = (datas) => {
+	document
+		.getElementById("lensSelect")
+		.addEventListener("change", function () {
+			let selectedLens = this.value;
+			createObject(datas, selectedLens);
+		});
 };
 
 // on crée un objet contenant les valeurs indispensables au panier dont l'optique précédemment sélectionnée
-const createObject = (datas) => {
-    let object  = {
-		name: datas.name,
-		price: datas.price / 100,
-        id: datas._id, 
+const createObject = (datas, selectedLens) => {
+	let object = {
+		id: datas._id,
 		quantity: 1,
+		option: selectedLens,
 	};
 	addToBasket(object);
 };
@@ -89,31 +99,34 @@ const addToBasket = (object) => {
 	document
 		.getElementById("addToBasket")
 		.addEventListener("click", function () {
-			if (!basket) {//on verifie qu'il n'existe pas de panier
+			if (!basket) {
+				//on verifie qu'il n'existe pas de panier
 				let basket = []; // on crée un panier
 				basket.push(object); // on lui ajoute l'objet
 				localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
-                localStorage.setItem("quantity" + object.id, object.quantity);//on stocke la quantité
-                localStorage.setItem("price" + object.id, object.price);//on stocke le prix
-				console.log(basket);
+				updateBasketChip();
 			} else {
-                let testQuantity = localStorage.getItem("quantity" + object.id);
-                if (testQuantity) {// on check si une quantité est déjà présente
-                    let updateQuantity = localStorage.getItem("quantity" + object.id);
-                    updateQuantity++;//on ajoute un à la quantité
-                    let updatePrice = localStorage.getItem("price" + object.id);
-                    updatePrice = updateQuantity * object.price;
-                    localStorage.setItem("price" + object.id, updatePrice);// on mets a jour la prix
-                    localStorage.setItem("quantity" + object.id, updateQuantity);// on mets a jour la quantité
-                }else {
-                    basket.push(object); // on lui ajoute l'objet
-                    localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
-                    localStorage.setItem("quantity" + object.id, object.quantity);// on mets a jour la prix
-                    localStorage.setItem("price" + object.id, object.price);// on mets a jour la quantité
-                }
+				basket.push(object);
+				localStorage.setItem("basket", JSON.stringify(basket));
+				find(basket);
 			}
+			updateBasketChip();
 		});
 };
 
-//Fonction Principales
+const find = (basket) => {
+	for (i = 1; i < basket.length; i++) {
+		if (
+			basket[basket.length - 1].id === basket[i - 1].id &&
+			basket[basket.length - 1].option === basket[i - 1].option
+		) {
+			basket[i - 1].quantity++;
+			basket.pop();
+			localStorage.setItem("basket", JSON.stringify(basket));
+		}
+	}
+};
+
+//Fonctions Principales
+updateBasketChip();
 getproductId();
