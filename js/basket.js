@@ -1,15 +1,10 @@
-// Création de l'objet pour le formatage du prix
-let formatPrice = new Intl.NumberFormat("fr-FR", {
-	style: "currency",
-	currency: "EUR",
-	currencyDisplay: "symbol",
-});
+// déclarations des variables
+let basket = JSON.parse(localStorage.getItem("basket"));
 
 /* suppression du boutton de validation quand le panier et vide,
 suppression du background panier vide,
 récupération des objets du tableau contenant les ids, quantité et choix de l'optique dans le localstorage*/
 const getObject = () => {
-    let basket = JSON.parse(localStorage.getItem("basket"));
     if (!basket) {
         document.getElementById("validateBasket").remove();
         return;

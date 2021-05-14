@@ -1,10 +1,3 @@
-// Création de l'objet pour le formatage du prix
-let formatPrice = new Intl.NumberFormat("fr-FR", {
-	style: "currency",
-	currency: "EUR",
-	currencyDisplay: "symbol",
-});
-
 //récupération de l'id du produit sélectionné
 const getproductId = () => {
 	let readId = window.location.search;
@@ -94,19 +87,17 @@ const createObject = (datas, selectedLens) => {
 
 // Ajout au panier
 const addToBasket = (object) => {
-	let basket = JSON.parse(localStorage.getItem("basket"));
+	if (!JSON.parse(localStorage.getItem("basket"))) {    //on verifie qu'il n'existe pas de panier
+		let basket = [];
+		localStorage.setItem("basket", JSON.stringify(basket));
+	}
 	document
 		.getElementById("addToBasket")
 		.addEventListener("click", function () {
-			if (!basket) {    //on verifie qu'il n'existe pas de panier
-				let basket = []; // on crée un panier
-				basket.push(object); // on lui ajoute l'objet
-				localStorage.setItem("basket", JSON.stringify(basket)); //on le stocke
-			} else {
-				basket.push(object);
-				localStorage.setItem("basket", JSON.stringify(basket));
-				find(basket); // on passe le panier a la fonction de recherche des produits en double
-			}
+			basket = JSON.parse(localStorage.getItem("basket"));
+			basket.push(object);
+			localStorage.setItem("basket", JSON.stringify(basket));
+			find(basket); // on passe le panier a la fonction de recherche des produits en double
 			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 		});
 };

@@ -1,12 +1,12 @@
 .basket {
     &__empty {
         @include column-center;
+        justify-content: center;
         height: 80vh;
         font-size: 30px;
         .fas {
             display: block;
             font-size: 150px;
-            margin-top: 40%;
         }
     }
     &__element {

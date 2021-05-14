@@ -1,13 +1,6 @@
 // Déclaration des variables
 let newDiv = 0;
 
-// Création de l'objet pour le formatage du prix
-let formatPrice = new Intl.NumberFormat("fr-FR", {
-	style: "currency",
-	currency: "EUR",
-	currencyDisplay: "symbol",
-});
-
 //Récupération des données 
 const getDatas = () => {
 	fetch("http://localhost:3000/api/cameras")
