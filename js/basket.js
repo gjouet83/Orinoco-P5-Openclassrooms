@@ -12,6 +12,7 @@ const getObject = () => {
     let basket = JSON.parse(localStorage.getItem("basket"));
     if (!basket) {
         document.getElementById("validateBasket").remove();
+        return;
     }else {
         let vanishEmptyBasket = document.querySelector(".basket__empty");
         vanishEmptyBasket.style.display = "none";
