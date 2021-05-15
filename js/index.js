@@ -1,28 +1,19 @@
 // Déclaration des variables
 let newDiv = 0;
 
-//Récupération des données 
-const getDatas = () => {
-	fetch("http://localhost:3000/api/cameras")
-		.then(response => {
-			if (response.ok) {
-				return response.json();
-			}
-		})
-		.then(datas => {
-			createThumbnails(datas);
-            console.log(datas);
-		});
-};
+//Récupération des données
+getDatas().then((datas) => {
+	createThumbnails(datas);
+	console.log(datas);
+});
 
-// Fonctions créations des composants de la vignette 
-
+// Fonctions créations des composants de la vignette
 const createName = (data) => {
 	let newName = document.createElement("h3");
 	let name = document.createTextNode(data.name);
 	newName.appendChild(name);
-    newDiv.appendChild(newName);
-    newName.classList.add("productList__element__name");
+	newDiv.appendChild(newName);
+	newName.classList.add("productList__element__name");
 };
 
 const createPicture = (data) => {
@@ -30,47 +21,47 @@ const createPicture = (data) => {
 	let newFigure = document.createElement("figure");
 	let newImg = document.createElement("img");
 	newImg.src = data.imageUrl;
-    newImg.width = 203;
-    newImg.height = 135;
-	newImg.alt = "appareil photo" + (data.name);
-    newPicture.appendChild(newFigure);
-    newDiv.appendChild(newPicture);
+	newImg.width = 203;
+	newImg.height = 135;
+	newImg.alt = "appareil photo" + data.name;
+	newPicture.appendChild(newFigure);
+	newDiv.appendChild(newPicture);
 	newFigure.appendChild(newImg);
-    newPicture.classList.add("productList__element__picture");
+	newPicture.classList.add("productList__element__picture");
 };
 
 const createPrice = (data) => {
 	let newPrice = document.createElement("div");
 	let newValue = document.createElement("span");
-	let value = document.createTextNode(formatPrice.format(data.price /100));
-    newDiv.appendChild(newPrice);
-    newPrice.appendChild(newValue);
+	let value = document.createTextNode(formatPrice.format(data.price / 100));
+	newDiv.appendChild(newPrice);
+	newPrice.appendChild(newValue);
 	newValue.appendChild(value);
-    newPrice.classList.add("productList__element__price");
-    newValue.classList.add("productList__element__price__value");    
+	newPrice.classList.add("productList__element__price");
+	newValue.classList.add("productList__element__price__value");
 };
 
 const createBtn = (data) => {
 	let newButton = document.createElement("a");
 	let viewProduct = document.createTextNode("Voir le produit");
-    newButton.setAttribute("href", "./product.html?"+(data._id));
-    newDiv.appendChild(newButton);
+	newButton.setAttribute("href", "./product.html?" + data._id);
+	newDiv.appendChild(newButton);
 	newButton.appendChild(viewProduct);
-    newButton.classList.add("productList__element__viewProduct");
+	newButton.classList.add("productList__element__viewProduct");
 	newButton.classList.add("btn");
 };
 
 // Fonction création de la vignette
 const createThumbnails = (datas) => {
-    for (let data of datas) {
-        createDiv ("productList", "productList__element");
-        createName(data);
-        createPicture(data);
-        createPrice(data);
-        createBtn(data);
-    }
+	for (let data of datas) {
+		createDiv("productList", "productList__element");
+		createName(data);
+		createPicture(data);
+		createPrice(data);
+		createBtn(data);
+	}
 };
 
 //Fonctions Principales
-updateBasketChip(); 
+updateBasketChip();
 getDatas();

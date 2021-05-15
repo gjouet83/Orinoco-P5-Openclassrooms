@@ -2,28 +2,20 @@
 const getproductId = () => {
 	let readId = window.location.search;
 	const id = readId.replace("?", "");
-	searchCamera(id);
-};
-
-// récupération des données corespondant a l'id récupéré
-const searchCamera = (id) => {
-	fetch("http://localhost:3000/api/cameras/" + id)
-		.then((response) => {
-			if (response.ok) {
-				return response.json();
-			}
-		})
-		.then((datas) => {
-			insertElements(datas);
-		});
+	// récupération des données corespondant a l'id récupéré  => helpers.js getDatas
+	getDataById(id).then((datas) => {
+		insertElements(datas);
+	});
 };
 
 //fonctions insertion des composants de la page produit
-const insertName = (datas) => { // nom de l'apn
+// nom de l'apn
+const insertName = (datas) => {
 	document.getElementById("name").textContent = datas.name;
 };
 
-const insertPicture = (datas) => {  // photo du produit
+// photo du produit
+const insertPicture = (datas) => {
 	let picture = document.getElementById("picture");
 	let newImg = document.createElement("img");
 	newImg.src = datas.imageUrl;
@@ -33,19 +25,23 @@ const insertPicture = (datas) => {  // photo du produit
 	picture.appendChild(newImg);
 };
 
-const insertDescription = (datas) => { // description du produit
+// description du produit
+const insertDescription = (datas) => {
 	document.getElementById("description").textContent = datas.description;
 };
 
-const insertPrice = (datas) => { // prix du produit
+// prix du produit
+const insertPrice = (datas) => {
 	document.getElementById("value").textContent = formatPrice.format(
 		datas.price / 100
 	);
 };
 
-const insertOption = (datas) => { // optiques
+// optiques
+const insertOption = (datas) => {
 	let lenses = datas.lenses; //on recupère le tableau des optiques
-	for (lens of lenses) {// boucle qui parcours le tableau des optiques
+	// boucle qui parcours le tableau des optiques
+	for (lens of lenses) {
 		let lensSelect = document.getElementById("lensSelect");
 		let newLens = document.createElement("option");
 		newLens.value = lens;
@@ -79,15 +75,18 @@ const getLens = (datas) => {
 const createObject = (datas, selectedLens) => {
 	let object = {
 		id: datas._id,
+		name: datas.name,
 		quantity: 1,
 		option: selectedLens,
+		price: datas.price,
 	};
 	addToBasket(object); // on passe l'objet a la fonction ajout au panier
 };
 
 // Ajout au panier
 const addToBasket = (object) => {
-	if (!JSON.parse(localStorage.getItem("basket"))) {    //on verifie qu'il n'existe pas de panier
+	//on verifie qu'il n'existe pas de panier
+	if (!JSON.parse(localStorage.getItem("basket"))) {
 		let basket = [];
 		localStorage.setItem("basket", JSON.stringify(basket));
 	}
@@ -99,17 +98,21 @@ const addToBasket = (object) => {
 			localStorage.setItem("basket", JSON.stringify(basket));
 			find(basket); // on passe le panier a la fonction de recherche des produits en double
 			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
+			let appearChoice = document.querySelector(".choice"); // on choisi la div choice
+			appearChoice.style.transform = "scale(1)"; // on la fait apparaitre avec u transistion
 		});
 };
 
-// fonction de recherche et élimination des doublons. On augmente le produit restant de 1 quantité 
+// fonction de recherche et élimination des doublons. On augmente le produit restant de 1 quantité
 const find = (basket) => {
 	for (i = 0; i < basket.length - 1; i++) {
+		/* on compare le dernier produit avec l'avant dernier ainsi que l'optique
+		pour ne pas additionner des produit avec des optiques différentes */
 		if (
 			basket[basket.length - 1].id === basket[i].id &&
-			basket[basket.length - 1].option === basket[i].option /* on compare le dernier produit avec l'avant dernier ainsi que l'optique
-																	 pour ne pas additionner des produit avec des optiques différentes */
+			basket[basket.length - 1].option ===basket[i].option 
 		) {
+			basket[i].price = basket[i].price / basket[i].quantity + basket[i].price; // on calcul le nouveau prix
 			basket[i].quantity++; // on incrémente la quantité du produit trouvé de 1
 			basket.pop(); // on supprime le dernier produit
 			localStorage.setItem("basket", JSON.stringify(basket)); // on stocke le tableau

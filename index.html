@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./css/style.min.css" />
 
     <script defer src="https://kit.fontawesome.com/a5c8cd89c4.js" crossorigin="anonymous"></script>
+    <script defer src="./helpers/getdatas.js"></script>
     <script defer src="./helpers/dom.js"></script>
     <script defer src="./helpers/basketChip.js"></script>
     <script defer src="./helpers/formatprice.js"></script>
@@ -66,10 +67,12 @@
           </a>
         </div>
         <div class="header__nav__basket" id="header__nav__basket">
-          <a class="header__nav__basket__icon"  href="basket.html">
-            <i class="fas fa-shopping-basket"></i>
-            Panier
+          <a class="header__nav__basket__link"  href="basket.html">
           </a>
+          <div class="header__nav__basket__icon">
+            <i class="fas fa-shopping-basket"></i>
+            <span>Panier</span>
+          </div>
           <div class="header__nav__basket--chip">
             <span>
             </span>

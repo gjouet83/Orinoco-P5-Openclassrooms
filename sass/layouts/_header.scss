@@ -153,8 +153,16 @@
 					color: $secondaryColor;
 				}
 			}
+			&__link {
+				display: block;
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				z-index: 2;
+			}
 			&__icon {
 				@include column-center;
+				z-index: 0;
 			}
 			&--chip {
 				@include font-color($red);
@@ -171,6 +179,7 @@
 				top: -50px;
 				text-align: center;
 				line-height: 20px;
+				z-index: 1;
 			}
 		}
 	}
