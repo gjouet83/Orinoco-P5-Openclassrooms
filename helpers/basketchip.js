@@ -3,7 +3,6 @@ const updateBasketChip = () => {
 	if (!basket) {
 		let vanish = document.querySelector(".header__nav__basket--chip");
 		vanish.style.display = "none";
-		return;
 	} else {
 		let appear = document.querySelector(".header__nav__basket--chip");
 		appear.style.display = "block";
@@ -12,5 +11,6 @@ const updateBasketChip = () => {
 			totalQuantity += basket[i].quantity;
 		}
 		document.querySelector(".header__nav__basket--chip span").textContent = totalQuantity;
+		return totalQuantity;
 	}
 };

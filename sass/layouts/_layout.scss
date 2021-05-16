@@ -8,6 +8,12 @@ html {
 			text-decoration: none;
 			color: black;
 		}
+		main {
+			min-height: 66vh;
+			@media all and (min-width: 800px) {
+				min-height: 55vh;
+			}
+		}	
 		.choice {
 			width: 100vw;
 			height: 100vh;
@@ -18,6 +24,13 @@ html {
 			z-index: 3;
 			transform: scale(0);
 			transition: transform 500ms;
+			&__succesAlert {
+				font-size: 2rem;
+				text-align: center;
+				padding: 8px;
+				background-color: white;
+				font-family: "Roboto-BlackItalic";
+			}
 		}
 		@import "./header";
 		@import "./main";

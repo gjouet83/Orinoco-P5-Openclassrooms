@@ -1,6 +1,3 @@
-// Déclaration des variables
-let newDiv = 0;
-
 //Récupération des données
 getDatas().then((datas) => {
 	createThumbnails(datas);
@@ -54,7 +51,8 @@ const createBtn = (data) => {
 // Fonction création de la vignette
 const createThumbnails = (datas) => {
 	for (let data of datas) {
-		createDiv("productList", "productList__element");
+		// creatDiv ("type","id pour getElement", "class a ajouter")
+		createDiv("div","productList", "productList__element");
 		createName(data);
 		createPicture(data);
 		createPrice(data);
