@@ -66,6 +66,7 @@ const insertElements = (datas) => {
 // on retourne l'optique sélectionnée
 const getLens = () => {
 	let selectedElement = document.getElementById("lensSelect");
+	console.log(selectedElement.selectedIndex);
 	let selectedLens = selectedElement.options[selectedElement.selectedIndex].value;
 	console.log(selectedLens);
 	return selectedLens;

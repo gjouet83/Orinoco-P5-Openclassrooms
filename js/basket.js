@@ -91,7 +91,7 @@ const deleteProduct = () => {
 const calculateTotalPrice = (basket) => {
     for (object of basket) {
         console.log(basket);
-        totalPrice += (object.price * object.quantity);
+        totalPrice += object.price;
     }
 }
 
