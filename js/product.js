@@ -1,3 +1,5 @@
+
+
 //récupération de l'id du produit sélectionné
 const getproductId = () => {
 	let readId = window.location.search;
@@ -58,21 +60,20 @@ const insertElements = (datas) => {
 	insertDescription(datas);
 	insertPrice(datas);
 	insertOption(datas);
-	getLens(datas);
+	addToBasket(datas);
 };
 
-// on enregistre l'optique sélectionnée dans une variable
-const getLens = (datas) => {
-	document
-		.getElementById("lensSelect")
-		.addEventListener("change", function () {
-			let selectedLens = this.value;
-			createObject(datas, selectedLens);
-		});
+// on retourne l'optique sélectionnée
+const getLens = () => {
+	let selectedElement = document.getElementById("lensSelect");
+	let selectedLens = selectedElement.options[selectedElement.selectedIndex].value;
+	console.log(selectedLens);
+	return selectedLens;
 };
 
 // on crée un objet contenant les valeurs indispensables au panier dont l'optique précédemment sélectionnée
-const createObject = (datas, selectedLens) => {
+const createObject = (datas) => {
+	let selectedLens = getLens();
 	let object = {
 		id: datas._id,
 		name: datas.name,
@@ -80,19 +81,23 @@ const createObject = (datas, selectedLens) => {
 		option: selectedLens,
 		price: datas.price,
 	};
-	addToBasket(object); // on passe l'objet a la fonction ajout au panier
+	return object; 
 };
 
 // Ajout au panier
-const addToBasket = (object) => {
-	//on verifie qu'il n'existe pas de panier
-	if (!JSON.parse(localStorage.getItem("basket"))) {
-		let basket = [];
-		localStorage.setItem("basket", JSON.stringify(basket));
-	}
+const addToBasket = (datas) => {
 	document
 		.getElementById("addToBasket")
 		.addEventListener("click", function () {
+			 let object = createObject(datas);
+			if (object.option === "NaO") {  // on verifie qu'une optique a bien été sélectionnée
+				alert("Veuillez selectionner une optique");
+				return;
+			}
+			if (!JSON.parse(localStorage.getItem("basket"))) {  	//on verifie qu'il n'existe pas de panier
+				let basket = [];
+				localStorage.setItem("basket", JSON.stringify(basket));
+			}
 			basket = JSON.parse(localStorage.getItem("basket"));
 			basket.push(object);
 			localStorage.setItem("basket", JSON.stringify(basket));
