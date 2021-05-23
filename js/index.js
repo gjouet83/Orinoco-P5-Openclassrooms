@@ -1,7 +1,6 @@
 //Récupération des données
 getDatas().then((datas) => {
 	createThumbnails(datas);
-	console.log(datas);
 });
 
 // Fonctions créations des composants de la vignette

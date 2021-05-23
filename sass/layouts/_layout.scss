@@ -23,7 +23,6 @@ html {
 			background-color: $clearWhite;
 			z-index: 3;
 			transform: scale(0);
-			transition: transform 500ms;
 			&__succesAlert {
 				font-size: 2rem;
 				text-align: center;

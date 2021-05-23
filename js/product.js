@@ -89,7 +89,7 @@ const createObject = (datas) => {
 const addToBasket = (datas) => {
 	document
 		.getElementById("addToBasket")
-		.addEventListener("click", function () {
+		.addEventListener("click", () => {
 			 let object = createObject(datas);
 			if (object.option === "NaO") {  // on verifie qu'une optique a bien été sélectionnée
 				alert("Veuillez selectionner une optique");
@@ -105,6 +105,7 @@ const addToBasket = (datas) => {
 			find(basket); // on passe le panier a la fonction de recherche des produits en double
 			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 			let appearChoice = document.querySelector(".choice"); // on choisi la div choice
+			appearChoice.style.transitionDuration = "500ms";
 			appearChoice.style.transform = "scale(1)"; // on la fait apparaitre avec u transistion
 		});
 };
@@ -118,7 +119,7 @@ const find = (basket) => {
 			basket[basket.length - 1].id === basket[i].id &&
 			basket[basket.length - 1].option ===basket[i].option 
 		) {
-			basket[i].price = basket[i].price / basket[i].quantity + basket[i].price; // on calcul le nouveau prix
+			 // on calcul le nouveau prix
 			basket[i].quantity++; // on incrémente la quantité du produit trouvé de 1
 			basket.pop(); // on supprime le dernier produit
 			localStorage.setItem("basket", JSON.stringify(basket)); // on stocke le tableau

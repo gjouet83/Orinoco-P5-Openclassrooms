@@ -18,19 +18,6 @@ const createTitle = (type, append, classlist, titre) => {
 	document.querySelector("." + classlist).appendChild(createTitle);
 };
 
-// création de button valider
-const createValidateButton = (classToAppend, classToAdd, value, name) => {
-	let divToAppend = document.querySelector(classToAppend)
-	let validate = document.createElement("input");
-	divToAppend.appendChild(validate);
-	validate.classList.add(classToAdd);
-	validate.classList.add("btn");
-	validate.setAttribute("type", "submit"); 
-	validate.setAttribute("value", value);
-	validate.setAttribute("name", name);
-	validate.setAttribute("id", name);
-}
-
 // création d'éléments dans basket.js
 const createArea = (createElement, createTextNode, classList) => {
 	let newElement = document.createElement(createElement);
@@ -60,6 +47,19 @@ const createInputForm = (label, textnode, input, id) => {
 	newLabel.classList.add(id);
 	inputLabel.classList.add("form__order__input");
 	inputLabel.classList.add(id);
+}
 
+// création de button valider
+const createButton = (classToAppend, classToAdd, value, name) => {
+	let divToAppend = document.querySelector(classToAppend)
+	let validate = document.createElement("input");
+	divToAppend.appendChild(validate);
+	validate.classList.add(classToAdd);
+	validate.classList.add("btn");
+	validate.setAttribute("type", "submit"); 
+	validate.setAttribute("value", value);
+	validate.setAttribute("name", name);
+	validate.setAttribute("id", name);
+		
 }
 

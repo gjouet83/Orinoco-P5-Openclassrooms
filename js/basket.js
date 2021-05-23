@@ -1,6 +1,7 @@
 // déclarations des variables
 let basket = JSON.parse(localStorage.getItem("basket"));
 let totalPrice = 0;
+let deleteId = 0;
 
 // nom de l'apn
 const createName = (object) => {
@@ -23,6 +24,8 @@ const createDeleteIcon = () => {
 	newProductDelete.classList.add("basket__element__productDelete--icon");
 	deleteIcon.classList.add("fas");
 	deleteIcon.classList.add("fa-trash-alt");
+    newProductDelete.setAttribute("id", deleteId);
+    deleteId++;
 };
 
 // création du formulaire de commande
@@ -35,7 +38,7 @@ const createFormOrder = () => {
     createInputForm ("label","Ville","input","city"); // helper dom.js
     createInputForm ("label","E-mail","input","email"); // helper dom.js
     // createValidateButton ("class pour getElement","class a ajouter a l'input", "texte", "nom")
-    createValidateButton(".form__order","form__order__validate","Commander","validateForm"); // helper dom.js
+    createButton(".form__order","form__order__validate","Commander","validateForm"); // helper dom.js
 }
 
 //création de la vignette avec tous le éléments
@@ -47,14 +50,15 @@ const createThumbnails = () => {
         // createArea ("type","texte a ajoute","class")ajoute a la div nouvellement créer
 		createArea ("label", "Qté", "basket__element__quantityLabel"); // titre pour la quantité d'apn
         createArea ("span",object.quantity,"basket__element__quantity"); // quantité d'un meme produit avec la meme option
-		createArea ("span","Prix","basket__element__priceLabel"); // titre pour le prix de l'apn
-		createArea ("span","Optique","basket__element__lensLabel"); // titre pour l'optique
+		createArea ("span","Prix Total","basket__element__priceLabel"); // titre pour le prix total de l'apn
+		createArea ("span","Prix Unitaire","basket__element__priceUnitLabel"); // titre prix unitaire
+        createArea ("span","Optique","basket__element__lensLabel"); // titre pour l'optique
 		createArea ("button","Supprimer","basket__element__productDelete"); //product delete non cree // boutton de suppression du produit version desktop
 		createDeleteIcon(object);
 		createName(object);
-		createArea ("span",formatPrice.format(object.price / 100),"basket__element__productPrice"); // prix de l'apn
+		createArea ("span",formatPrice.format(object.price / 100),"basket__element__productUnitPrice");
+        createArea ("span",formatPrice.format((object.price / 100) * object.quantity),"basket__element__productPrice"); // prix de l'apn
 		createArea ("span",object.option,"basket__element__productLens"); // optique choisie;
-        deleteProduct();
 	}
 };
 
@@ -69,30 +73,56 @@ const createRecap = (basket) => {
     createArea ("span","PRIX TOTAL","recap__element__totalLabel")
     createArea ("span",updateBasketChip(),"recap__element__basketQuantity")
     calculateTotalPrice(basket);
-    createArea ("span",(formatPrice.format(totalPrice / 100)),"recap__element__totalPrice")
+    createArea ("span",formatPrice.format(totalPrice / 100),"recap__element__totalPrice")
 }
 
-//fonction delete
-const deleteProduct = () => {
-	let deleteItem = document.querySelectorAll(
+//fonction creation de la liste des boutton supprimer
+const btnDeleteList = () => {
+	let deleteBtn = document.querySelectorAll(
 		".basket__element__productDelete--icon"
 	);
-	console.log(deleteItem.length);
-	for (i = 0; i < deleteItem.lenght; i++) {
-		console.log(i);
-		console.log(document
-			.querySelectorAll(".basket__element__productDelete--icon")
-			.addEventListener("click", function () {
-            }));
-	}
+    deleteBtn.forEach(function(item){
+        deleteProduct(item); // on récupère chaque item de la liste et on les passent a la fonction deleteProduct
+    })
 };
+
+// fonction  suppression d'élements
+const deleteProduct = (item) => {
+    item.addEventListener("click", () => {
+        basket.splice(item.id, 1);
+        localStorage.setItem("basket", JSON.stringify(basket));
+        if (basket.length === 0) {
+            localStorage.clear();
+        }
+        location.reload();
+    })
+}
 
 // fonction calcul prix total 
 const calculateTotalPrice = (basket) => {
     for (object of basket) {
         console.log(basket);
-        totalPrice += object.price;
+        totalPrice += (object.price * object.quantity);
     }
+}
+
+const validate = () => {
+
+}
+
+const sendOrder = () => {
+
+}
+
+const createContact = () => {
+    let city = document.getElementById("city")
+    let contact = {
+
+    }
+}
+
+const createOrder = () => {
+
 }
 
 // fonction principale d'affiche
@@ -109,14 +139,22 @@ const displayObject = () => {
         //création du recap du panier
         createRecap(basket) // helpers dom.js
         // création du boutton de validation du panier
-        createValidateButton(".recap","basket__validate","Valider mon panier","validateBasket"); // helper dom.js
+        createButton(".recap","basket__validate","Valider mon panier","validateBasket"); // helper dom.js
          // ecoute du boutton valider pour affichage du formulaire
         document.getElementById("validateBasket").addEventListener("click",() => {
-        createFormOrder();
-        })
+            createFormOrder();
+        });
+        // création du boutton vider du panier
+        createButton(".recap","basket__empty","VIDER mon panier","emptyBasket"); // helper dom.js
+        // ecoute du boutton vider le panier 
+        document.getElementById("emptyBasket").addEventListener("click",() => {
+            localStorage.clear(); // on vide le localstorage
+            location.reload(); // rafraichir la page pour enlever les elements
+        });
 	}
 };
 
 // appel des fonctions principales
 updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
-displayObject();
+displayObject(); // affichage des vignettes 
+btnDeleteList(); // listing des boutons delete qui appel ensuite la fonction delete

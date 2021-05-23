@@ -25,20 +25,21 @@
         box-sizing: border-box;
         background-color: $clearWhite;
         @media all and (min-width: 768px) {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(3, 0.3fr);
         }
         &__productName {
-            grid-column: 1 / 3;
+            grid-column: 2 / 5;
             grid-row: 1;
             margin: 0;
-            justify-self: flex-start;
+            justify-self: flex-end;
             font-size: 1.5rem;
             border-bottom: 1px solid black;
             @media all and (min-width: 768px) {
                 grid-column: 1;
                 grid-row: 2;
                 align-self: flex-start;
+                justify-self: flex-start;
                 border-bottom: none;
             }
         }
@@ -74,7 +75,6 @@
         &__productLens {
             grid-column: 2;
             grid-row: 4;
-            padding-top: 10px;
             text-align: center;
             @media all and (min-width: 768px) {
                 grid-column: 3;
@@ -87,24 +87,46 @@
             grid-row: 3;
             font-family: "Roboto-Black";
             font-style: italic;
+            padding-top: 10px;
+            @media all and (min-width: 768px) {
+                padding-top: 0px;
+                grid-column: 5;
+                grid-row: 1;
+            }
+        }
+        &__priceUnitLabel {
+            font-family: "Roboto-Black";
+            font-style: italic; 
             @media all and (min-width: 768px) {
                 grid-column: 4;
                 grid-row: 1;
-            }
+            }  
         }
         &__productPrice {
             grid-column: 1;
             grid-row: 4;
-            padding-top: 10px;
             align-self: flex-start;
             font-family: "Roboto-Black";
             font-style: italic;
             font-size: 1.5rem;
             color: $red;
             @media all and (min-width: 768px) {
-                grid-column: 4;
+                grid-column: 5;
                 grid-row: 3;
                 padding-top: 0;
+            }
+        }
+        &__productUnitPrice {
+            align-self: flex-start;
+            font-family: "Roboto-Black";
+            font-style: italic;
+            color: $red;
+            grid-column: 1;
+            grid-row: 2;
+            @media all and (min-width: 768px) {
+                font-size: 1.5rem;
+                grid-column: 4;
+                grid-row: 3;
             }
         }
         &__productDelete {
@@ -128,6 +150,10 @@
     }
     &__validate {
         display: block;
+    }
+    &__empty {
+        display: block;
+        background-color: $red;
     }
 }
 .recap {
@@ -182,6 +208,7 @@
             @media all and (min-width: 768px) {
                 grid-row: 1;
                 grid-column: 4;
+                text-align: center;
             }
         }
     }
