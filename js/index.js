@@ -4,7 +4,7 @@ getDatas().then((datas) => {
 });
 
 // Fonctions créations des composants de la vignette
-const createName = (data) => {
+const createProductName = (data) => {
 	let newName = document.createElement("h3");
 	let name = document.createTextNode(data.name);
 	newName.appendChild(name);
@@ -52,7 +52,7 @@ const createThumbnails = (datas) => {
 	for (let data of datas) {
 		// creatDiv ("type","id pour getElement", "class a ajouter")
 		createDiv("div","productList", "productList__element");
-		createName(data);
+		createProductName(data);
 		createPicture(data);
 		createPrice(data);
 		createBtn(data);
