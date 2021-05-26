@@ -50,10 +50,6 @@ const createThumbnails = () => {
 
 // fonction principale
 const displayOrder = (order) => {
-    updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
-    document.querySelector(".header__nav__btn").style.display = "none";
-    document.querySelector(".header__nav__basket").style.display = "none";
-    document.querySelector(".header__nav__logo").style.display = "block";
     basketToSend();
     displayOrderId(order);
     createThumbnails();

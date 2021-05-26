@@ -3,7 +3,6 @@
 	display: grid;
 	position: relative;
 	grid-template-columns: repeat(2, 1fr);
-
 	&__type {
 		grid-column: 1 / 4;
 		grid-row: 1;

@@ -1,5 +1,3 @@
-
-
 //récupération de l'id du produit sélectionné
 const getproductId = () => {
 	let readId = window.location.search;
@@ -107,7 +105,7 @@ const addToBasket = (datas) => {
 			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 			let appearChoice = document.querySelector(".choice"); // on choisi la div choice
 			appearChoice.style.transitionDuration = "500ms";
-			appearChoice.style.transform = "scale(1)"; // on la fait apparaitre avec u transistion
+			appearChoice.style.transform = "scale(1)"; // on la fait apparaitre avec u transistion*/
 		});
 };
 

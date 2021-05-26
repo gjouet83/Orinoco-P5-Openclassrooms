@@ -87,7 +87,7 @@ const displayObject = () => {
 	if (basket) {
         // suppression du background panier vide
 		let vanishEmptyBasket = document.querySelector(".emptyBasket");
-		vanishEmptyBasket.style.display = "none";
+		vanishEmptyBasket.parentNode.removeChild(vanishEmptyBasket);
         // création du titre de la section basket
         // createTitle ("type","id pour getElement", "class a ajouter" et id, "titre")
         createTitle ("h2","basket","basket__title","--Orinoco-- Votre Panier ");
@@ -141,11 +141,7 @@ const createContact = () => {
             city: city.value,
             email: email.value,
         }
-        validate(contact);
-        if (validate(contact)) {
-            console.log(firstName);
-            localStorage.setItem("contact", JSON.stringify(contact)); 
-        };
+        localStorage.setItem("contact", JSON.stringify(contact)); 
     });
 }
 
