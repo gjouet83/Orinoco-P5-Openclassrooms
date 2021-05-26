@@ -80,7 +80,6 @@ const createRecap = (basket) => {
     createArea ("span",formatPrice.format(totalPrice / 100),"recap__element__totalPrice")
 }
 
-
 // fonction principale d'affiche
 const displayObject = () => {
     updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
@@ -114,24 +113,26 @@ const displayObject = () => {
 
 // création du formulaire de commande
 const createFormOrder = () => {
-    createNewForm();  // helper dom.js
-    // createInputForm ("type","nom du label","type", "id de l'input et for pour label")
-    createInputForm ("label","Nom","input","lastName","text"); // helper dom.js
-    createInputForm ("label","Prénom","input","firstName","text"); // helper dom.js
-    createInputForm ("label","Adresse","input","adress","text"); // helper dom.js
-    createInputForm ("label","Ville","input","city","text"); // helper dom.js
-    createInputForm ("label","E-mail","input","email","email"); // helper dom.js
-    // createValidateButton ("class pour getElement","class a ajouter a l'input", "texte", "nom")
-    createButton(".form__order","form__order__validate","Commander","validateForm"); // helper dom.js
+    if (!document.querySelector(".form__order")) {
+        createNewForm();  // helper dom.js
+        // createInputForm ("type","nom du label","type", "id de l'input et for pour label")
+        createInputForm ("label","Nom","input","lastName","text","Nom"); // helper dom.js
+        createInputForm ("label","Prénom","input","firstName","text","Prénom"); // helper dom.js
+        createInputForm ("label","Adresse","input","address","text","5 rue Victor Hugo"); // helper dom.js
+        createInputForm ("label","Ville","input","city","text","Paris"); // helper dom.js
+        createInputForm ("label","E-mail","input","email","email","example@provider.com"); // helper dom.js
+        // createValidateButton ("class pour getElement","class a ajouter a l'input", "texte", "nom")
+        createButton(".form__order","form__order__validate","Commander","validateForm"); // helper dom.js
+    }
     createContact();
 }
 
 // fonction création de l'objet contact
 const createContact = () => {
-    document.getElementById("validateForm").addEventListener("click", () => {
+    document.getElementById("validateForm").addEventListener("click", (event) => {
         let firstName = document.getElementById("firstName");
         let lastName = document.getElementById("lastName");
-        let address = document.getElementById("adress");
+        let address = document.getElementById("address");
         let city = document.getElementById("city");
         let email = document.getElementById("email");
         let contact = {
@@ -141,14 +142,46 @@ const createContact = () => {
             city: city.value,
             email: email.value,
         }
-        localStorage.setItem("contact", JSON.stringify(contact)); 
+        if (!validateFirstName(contact)) {
+            isInvalid("firstName", event); // helpers dom.js
+        } 
+        if (!validateLastName(contact)) {
+            isInvalid("lastName", event); // helpers dom.js
+        }  
+        if (!validateAddress(contact)) {
+            isInvalid("address", event); // helpers dom.js
+        }  
+        if (!validateCity(contact)) {
+            isInvalid("city", event); // helpers dom.js
+        }  
+        if (!validateEmail(contact)) {
+            isInvalid("email", event); // helpers dom.js    
+        }else {
+            localStorage.setItem("contact", JSON.stringify(contact));
+        }
     });
 }
 
-
-const validate = (contact) => {
+const validateFirstName = (contact) => {
     console.log(contact.firstName);
-    return /^e[0-9]{3,}$/.test(contact.firstName); 
+    return /^[A-Za-zéèàçà'-\s]{3,15}$/.test(contact.firstName); 
 }
+
+const validateLastName = (contact) => {
+    return /^[A-Za-zéèçà'-\s]{3,15}$/.test(contact.lastName);
+}
+
+const validateAddress = (contact) => {
+    return /^[A-Za-z0-9éè'-\s]{3,40}$/.test(contact.address);
+}
+
+const validateCity = (contact) => {
+    return /^[A-Za-z'-\s]{3,15}$/.test(contact.city);
+}
+
+const validateEmail = (contact) => {
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(contact.email);
+}
+
 // appel des fonctions principales
 displayObject(); // affichage des vignettes 

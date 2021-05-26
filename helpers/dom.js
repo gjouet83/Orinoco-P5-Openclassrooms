@@ -47,7 +47,7 @@ const createNewForm = () => {
 	newForm.classList.add("form__order");
 }
 
-const createInputForm = (label, textnode, input, id, type) => {
+const createInputForm = (label, textnode, input, id, type, placeholder) => {
 	let newLabel = document.createElement(label);
     let textLabel = document.createTextNode(textnode);
     let newInput = document.createElement(input);
@@ -60,7 +60,8 @@ const createInputForm = (label, textnode, input, id, type) => {
 	newLabel.classList.add(id);
 	newInput.classList.add("form__order__input");
 	newInput.setAttribute("type", type);
-	newInput.setAttribute("required", "required")
+	newInput.setAttribute("required", "required");
+	newInput.setAttribute("placeholder", placeholder);
 	newInput.classList.add(id);
 }
 
@@ -77,3 +78,10 @@ const createButton = (classToAppend, classToAdd, value, name) => {
 	validate.setAttribute("id", name);
 }
 
+// creation d'erreur de saisie dans le formulaire
+const isInvalid = (inputId, event) => {
+	document.getElementById(inputId).value = "";
+	document.getElementById(inputId).setAttribute("placeholder", "Format Incorrect");
+	document.getElementById(inputId).classList.add("invalid");
+	event.preventDefault();
+}
