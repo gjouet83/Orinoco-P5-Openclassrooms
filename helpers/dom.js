@@ -43,6 +43,7 @@ const createName = (object, className) => {
 const createNewForm = () => {
     newForm = document.createElement("form");
     document.getElementById("form").appendChild(newForm);
+	newForm.setAttribute("action","order.html");
 	newForm.classList.add("form__order");
 }
 

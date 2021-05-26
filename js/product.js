@@ -87,6 +87,7 @@ const createObject = (datas) => {
 
 // Ajout au panier
 const addToBasket = (datas) => {
+	updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 	document
 		.getElementById("addToBasket")
 		.addEventListener("click", () => {
@@ -128,5 +129,4 @@ const find = (basket) => {
 };
 
 //Fonctions Principales
-updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 getproductId();

@@ -1,7 +1,7 @@
 // déclarations des variables
 let basket = JSON.parse(localStorage.getItem("basket"));
 let totalPrice = 0;
-let deleteId = 0;
+let deleteId = 0; 
 
 // boutton de suppression du produit
 const createDeleteIcon = () => {
@@ -83,6 +83,7 @@ const createRecap = (basket) => {
 
 // fonction principale d'affiche
 const displayObject = () => {
+    updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 	if (basket) {
         // suppression du background panier vide
 		let vanishEmptyBasket = document.querySelector(".emptyBasket");
@@ -103,6 +104,7 @@ const displayObject = () => {
             localStorage.clear(); // on vide le localstorage
             location.reload(); // rafraichir la page pour enlever les elements
         });
+        btnDeleteList(); // listing des boutons delete qui appel ensuite la fonction delete
         // ecoute du boutton valider pour affichage du formulaire
         document.getElementById("validateBasket").addEventListener("click",() => {
             createFormOrder();
@@ -139,19 +141,18 @@ const createContact = () => {
             city: city.value,
             email: email.value,
         }
-        console.log(firstName);
         validate(contact);
+        if (validate(contact)) {
+            console.log(firstName);
+            localStorage.setItem("contact", JSON.stringify(contact)); 
+        };
     });
 }
 
 
 const validate = (contact) => {
     console.log(contact.firstName);
-
-    localStorage.setItem("contact", JSON.stringify(contact));
-   
+    return /^e[0-9]{3,}$/.test(contact.firstName); 
 }
 // appel des fonctions principales
-updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 displayObject(); // affichage des vignettes 
-btnDeleteList(); // listing des boutons delete qui appel ensuite la fonction delete

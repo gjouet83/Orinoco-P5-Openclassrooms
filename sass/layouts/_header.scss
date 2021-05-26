@@ -23,6 +23,7 @@
 		align-items: center;
 		@media all and (min-width: 768px) {
 			grid-template-columns: 6fr 3fr 1fr;
+			align-items: inherit;
 		}
 		i {
 			font-size: 2rem;
@@ -33,7 +34,9 @@
 			grid-row: 1;
 			font-size: 14px;
 			@media all and (min-width: 768px) {
-				display: none;
+				grid-column: 2;
+				font-size: 16px;
+				margin-left: auto;
 			}
 		}
 		&__logo {
@@ -45,6 +48,9 @@
 				grid-column: 1;
 				margin-right: auto;
 				margin-left: 20px;
+			}
+			@media all and (min-width: 1024px) {
+				margin-left: 9vw;
 			}
 		}
 		&__basket {
@@ -69,6 +75,9 @@
 				&:hover i {
 					color: $secondaryColor;
 				}
+			}
+			@media all and (min-width: 1024px) {
+				margin-right: 9vw;
 			}
 			&__link {
 				display: block;

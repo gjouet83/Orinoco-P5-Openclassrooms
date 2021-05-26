@@ -13,6 +13,10 @@ html {
 			@media all and (min-width: 800px) {
 				min-height: 55vh;
 			}
+			@media all and (min-width: 1024px) {
+				margin-left: 9vw;
+				margin-right: 9vw;
+			}
 		}	
 		.choice {
 			width: 100vw;
