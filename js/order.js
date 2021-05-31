@@ -1,6 +1,8 @@
+// declaration des variables
 let basket = JSON.parse(localStorage.getItem("basket"));
 let contact = JSON.parse(localStorage.getItem("contact"));
 let products = [];
+let totalPrice = 0;
 
 // création du tableau avec les id des produits
 const basketToSend = () => {
@@ -33,6 +35,11 @@ const displayOrderId = (order) => {
     document.getElementById("displayOrderId").textContent = "Commande n°" + order.orderId;
 }
 
+// on ajoute le nom du client
+const displayCustumerName = (contact) => {
+	document.querySelector(".displayOrder__name").textContent = "MERCI! " + contact.firstName;
+}
+
 //création de la vignette avec tous le éléments
 //createArea =>  helper dom.js
 const createThumbnails = () => {
@@ -48,10 +55,30 @@ const createThumbnails = () => {
 	}
 };
 
+// fonction calcul prix total 
+const calculateTotalPriceOrder = (basket) => {
+    for (object of basket) {
+        console.log(basket);
+        totalPrice += (object.price * object.quantity);
+    }
+}
+
+// création du récap du prix total de la commande
+const createRecapOrder = (basket) => {
+    // creatDiv ("type","id pour getElement", "class a ajouter")
+    createDiv("div","displayOrder","displayOrder__recap");
+    createArea ("span","MONTANT TOTAL DE LA COMMANDE","displayOrder__recap__label")
+    calculateTotalPriceOrder(basket);
+    createArea ("span",formatPrice.format(totalPrice / 100),"displayOrder__recap__totalPrice")
+}
+
+
 // fonction principale
 const displayOrder = (order) => {
     basketToSend();
+	displayCustumerName(contact);
     displayOrderId(order);
+	createRecapOrder(basket);
     createThumbnails();
     createButton(".displayOrder","displayOrder__btn","Terminer","Terminer");
     document.querySelector(".displayOrder__btn").addEventListener("click", () => {

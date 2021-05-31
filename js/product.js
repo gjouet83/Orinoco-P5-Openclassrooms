@@ -2,9 +2,18 @@
 const getproductId = () => {
 	let readId = window.location.search;
 	const id = readId.replace("?", "");
-	// récupération des données corespondant a l'id récupéré  => helpers.js getDatas
-	getDataById(id).then((datas) => {
+	// récupération des données corespondant a l'id récupéré
+	fetch("http://localhost:3000/api/cameras/" + id)
+	.then((response) => {
+		if (response.ok) {
+			return response.json();
+		}
+	})
+	.then((datas) => {
 		insertElements(datas);
+	})
+	.catch((error) => { 
+		alert("Erreur : " + error);
 	});
 };
 
@@ -90,8 +99,13 @@ const addToBasket = (datas) => {
 		.getElementById("addToBasket")
 		.addEventListener("click", () => {
 			 let object = createObject(datas);
-			if (object.option === "NaO") {  // on verifie qu'une optique a bien été sélectionnée
-				alert("Veuillez selectionner une optique");
+			if (object.option === "") {  // on verifie qu'une optique a bien été sélectionnée
+				let appearLensAlert = document.querySelector(".lensAlert"); // on choisi la div choice
+				appearLensAlert.style.transitionDuration = "500ms";
+				appearLensAlert.style.transform = "scale(1)";
+				document.querySelector(".lensAlert__validate").addEventListener("click", () => {
+					location.reload();
+				});
 				return;
 			}
 			if (!JSON.parse(localStorage.getItem("basket"))) {  	//on verifie qu'il n'existe pas de panier

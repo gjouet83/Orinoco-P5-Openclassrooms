@@ -11,29 +11,22 @@ html {
 		main {
 			min-height: 66vh;
 			@media all and (min-width: 800px) {
-				min-height: 55vh;
+				min-height: 65vh;
 			}
 			@media all and (min-width: 1024px) {
+				min-height: 76vh;
 				margin-left: 9vw;
 				margin-right: 9vw;
 			}
-		}	
-		.choice {
-			width: 100vw;
-			height: 100vh;
-			position: fixed;
-			@include column-center;
-			justify-content: center;
-			background-color: $clearWhite;
-			z-index: 3;
-			transform: scale(0);
-			&__succesAlert {
-				font-size: 2rem;
-				text-align: center;
-				padding: 8px;
-				background-color: white;
-				font-family: "Roboto-BlackItalic";
+			@media all and (min-width: 1366px) {
+				
 			}
+		}
+		.choice {
+			@include popup;
+		}
+		.lensAlert {
+			@include popup;
 		}
 		@import "./header";
 		@import "./main";

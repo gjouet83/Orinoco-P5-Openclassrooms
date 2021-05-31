@@ -3,3 +3,22 @@
 	flex-direction: column;
 	align-items: center;
 }
+
+@mixin popup {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	@include column-center;
+	justify-content: center;
+	background-color: $clearWhite;
+	z-index: 3;
+	transform: scale(0);
+	&__message {
+		border: 2px solid $secondaryColor;
+		font-size: 2rem;
+		text-align: center;
+		padding: 8px;
+		background-color: white;
+		font-family: "Roboto-BlackItalic";
+	}
+}

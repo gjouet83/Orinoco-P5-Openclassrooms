@@ -11,9 +11,9 @@ const createDiv = (type, append, classlist) => {
 
 // Création de titre
 const createTitle = (type, append, classlist, titre) => {
-	newDiv = document.createElement(type);
-	document.getElementById(append).appendChild(newDiv);
-	newDiv.classList.add(classlist);
+	let newTitle = document.createElement(type);
+	document.getElementById(append).appendChild(newTitle);
+	newTitle.classList.add(classlist);
 	let createTitle = document.createTextNode(titre);
 	document.querySelector("." + classlist).appendChild(createTitle);
 };

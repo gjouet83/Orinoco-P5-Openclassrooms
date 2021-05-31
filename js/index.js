@@ -1,7 +1,20 @@
 //Récupération des données
-getDatas().then((datas) => {
-	createThumbnails(datas);
-});
+const getDatas = () => {
+	fetch("http://localhost:3000/api/cameras")
+		.then((response) => {
+			if (response.ok) {
+				return response.json();
+			}
+		})
+		.then((datas) => {
+			createThumbnails(datas);
+		})
+		.catch((error) => { 
+			alert("Erreur : " + error);
+		});
+		// Une erreur est survenue
+};
+
 
 // Fonctions créations des composants de la vignette
 const createProductName = (data) => {

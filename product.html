@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="./css/style.min.css" />
 
     <script defer src="https://kit.fontawesome.com/a5c8cd89c4.js" crossorigin="anonymous"></script>
-    <script defer src="./helpers/getdatas.js"></script>
     <script defer src="./helpers/dom.js"></script>
     <script defer src="./helpers/basketChip.js"></script>
     <script defer src="./helpers/formatprice.js"></script>
@@ -28,7 +27,7 @@
   </head>
   <body>
     <div class="choice">
-      <span class="choice__succesAlert">
+      <span class="choice__message">
         Produit ajouté au panier !
       </span>
       <a href="./index.html" class="choice__continu btn">
@@ -37,6 +36,12 @@
       <a href="./basket.html" class="choice__viewBasket btn">
         Voir mon panier
       </a>
+    </div>
+    <div class="lensAlert">
+      <span class="lensAlert__message">
+        Veuillez sélectionner une optique
+      </span>
+      <input type="submit" class="lensAlert__validate btn" value="OK">
     </div>
     <header class="header">
       <h1 class="header__title">
@@ -58,7 +63,7 @@
           </a>
         </div>
         <div class="header__nav__basket" id="header__nav__basket">
-          <a class="header__nav__basket__link"  href="basket.html">
+          <a class="header__nav__basket__link"  href="basket.html" aria-label="panier">
           </a>
           <div class="header__nav__basket__icon">
             <i class="fas fa-shopping-basket"></i>
@@ -94,8 +99,8 @@
           <label for="lensSelect">
             Choisissez une optique
           </label>
-          <select name="lens" id="lensSelect" >
-            <option value="NaO" select= "selected">
+          <select name="lens" id="lensSelect" required>
+            <option value="" >
               --Liste des options--
             </option>
           </select> 
@@ -145,11 +150,11 @@
         </a>
       </div>
       <div class="footer__pay">
-        <i class="footer__pay__elements fab fa-cc-visa" aria-label="visa"></i>
-        <i class="footer__pay__elements fab fa-cc-mastercard" aria-label="mastercard"></i>
-        <i class="footer__pay__elements fab fa-cc-amex" aria-label="amex"></i>
-        <i class="footer__pay__elements fab fa-cc-apple-pay" aria-label="apple-pay"></i>
-        <i class="footer__pay__elements fab fa-cc-paypal" aria-label="paypal"></i>
+        <i class="footer__pay__elements fab fa-cc-visa" title="visa"></i>
+        <i class="footer__pay__elements fab fa-cc-mastercard" title="mastercard"></i>
+        <i class="footer__pay__elements fab fa-cc-amex" title="amex"></i>
+        <i class="footer__pay__elements fab fa-cc-apple-pay" title="apple-pay"></i>
+        <i class="footer__pay__elements fab fa-cc-paypal" title="paypal"></i>
       </div>
     </footer>
   </body>

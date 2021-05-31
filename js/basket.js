@@ -9,9 +9,10 @@ const createDeleteIcon = () => {
 	let deleteIcon = document.createElement("i");
 	newProductDelete.appendChild(deleteIcon);
 	newDiv.appendChild(newProductDelete);
-	newProductDelete.classList.add("basket__element__productDelete--icon");
+	newProductDelete.classList.add("basket__element__productDelete");
 	deleteIcon.classList.add("fas");
 	deleteIcon.classList.add("fa-trash-alt");
+    newProductDelete.setAttribute("aria-label", "bouton supprimer article")
     newProductDelete.setAttribute("id", deleteId);
     deleteId++;
 };
@@ -19,7 +20,7 @@ const createDeleteIcon = () => {
 //fonction creation de la liste des boutton supprimer
 const btnDeleteList = () => {
 	let deleteBtn = document.querySelectorAll(
-		".basket__element__productDelete--icon"
+		".basket__element__productDelete"
 	);
     deleteBtn.forEach(function(item){
         deleteProduct(item); // on récupère chaque item de la liste et on les passent a la fonction deleteProduct
@@ -113,7 +114,12 @@ const displayObject = () => {
 
 // création du formulaire de commande
 const createFormOrder = () => {
-    if (!document.querySelector(".form__order")) {
+    if (!document.querySelector(".form__order")) { // on empèche la creation d'un deuxieme formulaire lors d'un second click
+        // createTitle ("type","id pour getElement", "class a ajouter" et id, "titre")
+        createTitle ("h2","form","form__title","Formulaire de commande");
+        // notice du formulaire champs obligatoires
+        createDiv ("strong","form","form__requiredField");
+        document.querySelector(".form__requiredField").textContent = "Tous les champs sont OBLIGATOIRES";
         createNewForm();  // helper dom.js
         // createInputForm ("type","nom du label","type", "id de l'input et for pour label")
         createInputForm ("label","Nom","input","lastName","text","Nom"); // helper dom.js
@@ -123,6 +129,7 @@ const createFormOrder = () => {
         createInputForm ("label","E-mail","input","email","email","example@provider.com"); // helper dom.js
         // createValidateButton ("class pour getElement","class a ajouter a l'input", "texte", "nom")
         createButton(".form__order","form__order__validate","Commander","validateForm"); // helper dom.js
+        window.location.href = "#form";
     }
     createContact();
 }
@@ -142,6 +149,13 @@ const createContact = () => {
             city: city.value,
             email: email.value,
         }
+        // reset de l'affichage de l'erreur
+        document.getElementById("firstName").classList.remove("invalid");
+        document.getElementById("lastName").classList.remove("invalid");
+        document.getElementById("address").classList.remove("invalid");
+        document.getElementById("city").classList.remove("invalid");
+        document.getElementById("email").classList.remove("invalid");
+        // on test si la saisie correspond au regex
         if (!validateFirstName(contact)) {
             isInvalid("firstName", event); // helpers dom.js
         } 
@@ -162,6 +176,7 @@ const createContact = () => {
     });
 }
 
+// regex
 const validateFirstName = (contact) => {
     console.log(contact.firstName);
     return /^[A-Za-zéèàçà'-\s]{3,15}$/.test(contact.firstName); 
@@ -172,7 +187,7 @@ const validateLastName = (contact) => {
 }
 
 const validateAddress = (contact) => {
-    return /^[A-Za-z0-9éè'-\s]{3,40}$/.test(contact.address);
+    return /^[0-9]{0,6}[A-Za-zéèçà'-\s]{3,40}$/.test(contact.address);
 }
 
 const validateCity = (contact) => {
@@ -180,7 +195,7 @@ const validateCity = (contact) => {
 }
 
 const validateEmail = (contact) => {
-    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(contact.email);
+    return /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/.test(contact.email);
 }
 
 // appel des fonctions principales
