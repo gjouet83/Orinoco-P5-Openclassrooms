@@ -22,12 +22,6 @@ html {
 				
 			}
 		}
-		.choice {
-			@include popup;
-		}
-		.lensAlert {
-			@include popup;
-		}
 		@import "./header";
 		@import "./main";
 		@import "./footer";

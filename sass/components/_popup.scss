@@ -1,3 +1,9 @@
+.choice {
+    @include popup; // helpers.scss
+}
+.lensAlert {
+    @include popup;
+}
 .appear {
     @include popup;
     transition-duration: 500ms;
