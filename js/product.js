@@ -98,7 +98,7 @@ const addToBasket = (datas) => {
 		.addEventListener("click", () => {
 			 let object = createObject(datas);
 			if (object.option === "") {  // on verifie qu'une optique a bien été sélectionnée
-				document.querySelector(".lensAlert").classList.replace("lensAlert","appear"); // on choisi la div choice
+				document.querySelector(".lensAlert").classList.replace("lensAlert","popupAppear"); // on choisi la div choice
 				document.querySelector(".lensAlert__validate").addEventListener("click", () => {
 					location.reload();
 				});
@@ -113,7 +113,7 @@ const addToBasket = (datas) => {
 			localStorage.setItem("basket", JSON.stringify(basket));
 			find(basket); // on passe le panier a la fonction de recherche des produits en double
 			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
-			document.querySelector(".choice").classList.replace("choice","appear"); // on choisi la div choice
+			document.querySelector(".choice").classList.replace("choice","popupAppear"); // on choisi la div choice
 		});
 };
 

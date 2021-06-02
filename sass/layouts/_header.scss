@@ -106,6 +106,9 @@
 				text-align: center;
 				line-height: 20px;
 				z-index: 1;
+				&Disappear {
+					display: none;
+				}
 			}
 		}
 	}

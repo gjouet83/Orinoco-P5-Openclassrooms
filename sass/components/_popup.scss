@@ -4,7 +4,7 @@
 .lensAlert {
     @include popup;
 }
-.appear {
+.popupAppear {
     @include popup;
     transition-duration: 500ms;
     transform: scale(1);
