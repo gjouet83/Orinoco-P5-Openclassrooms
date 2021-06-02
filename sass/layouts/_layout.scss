@@ -8,20 +8,6 @@ html {
 			text-decoration: none;
 			color: black;
 		}
-		main {
-			min-height: 66vh;
-			@media all and (min-width: 800px) {
-				min-height: 65vh;
-			}
-			@media all and (min-width: 1024px) {
-				min-height: 76vh;
-				margin-left: 9vw;
-				margin-right: 9vw;
-			}
-			@media all and (min-width: 1366px) {
-				
-			}
-		}
 		@import "./header";
 		@import "./main";
 		@import "./footer";

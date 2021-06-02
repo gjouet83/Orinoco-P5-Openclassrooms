@@ -1,4 +1,13 @@
 & > main {
+    min-height: 72vh;
+    @media all and (min-width: 800px) {
+        min-height: 65vh;
+    }
+    @media all and (min-width: 1024px) {
+        min-height: 76vh;
+        margin-left: 9vw;
+        margin-right: 9vw;
+    }
 	@import "../pages/index";
 	@import "../pages/product";
 	@import "../pages/order";
