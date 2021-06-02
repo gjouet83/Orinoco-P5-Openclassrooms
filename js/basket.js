@@ -13,8 +13,6 @@ const createDeleteIcon = () => {
 	deleteIcon.classList.add("fas");
 	deleteIcon.classList.add("fa-trash-alt");
     newProductDelete.setAttribute("aria-label", "bouton supprimer article")
-    newProductDelete.setAttribute("id", deleteId);
-    deleteId++;
 };
 
 //fonction creation de la liste des boutton supprimer
@@ -22,15 +20,15 @@ const btnDeleteList = () => {
 	let deleteBtn = document.querySelectorAll(
 		".basket__element__productDelete"
 	);
-    deleteBtn.forEach(function(item){
-        deleteProduct(item); // on récupère chaque item de la liste et on les passent a la fonction deleteProduct
+    deleteBtn.forEach(function(item, index){
+        deleteProduct(item, index); // on récupère chaque item et son index de la liste et on les passent a la fonction deleteProduct
     })
 };
 
 // fonction  suppression d'élements
-const deleteProduct = (item) => {
+const deleteProduct = (item, index) => {
     item.addEventListener("click", () => {
-        basket.splice(item.id, 1);
+        basket.splice(index, 1);
         localStorage.setItem("basket", JSON.stringify(basket));
         if (basket.length === 0) {
             localStorage.clear();
@@ -38,6 +36,8 @@ const deleteProduct = (item) => {
         location.reload();
     })
 }
+
+
 
 //création de la vignette avec tous le éléments
 //createArea =>  helper dom.js
