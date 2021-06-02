@@ -73,9 +73,7 @@ const insertElements = (datas) => {
 // on retourne l'optique sélectionnée
 const getLens = () => {
 	let selectedElement = document.getElementById("lensSelect");
-	console.log(selectedElement.selectedIndex);
 	let selectedLens = selectedElement.options[selectedElement.selectedIndex].value;
-	console.log(selectedLens);
 	return selectedLens;
 };
 
@@ -100,9 +98,7 @@ const addToBasket = (datas) => {
 		.addEventListener("click", () => {
 			 let object = createObject(datas);
 			if (object.option === "") {  // on verifie qu'une optique a bien été sélectionnée
-				let appearLensAlert = document.querySelector(".lensAlert"); // on choisi la div choice
-				appearLensAlert.style.transitionDuration = "500ms";
-				appearLensAlert.style.transform = "scale(1)";
+				document.querySelector(".lensAlert").classList.replace("lensAlert","appear"); // on choisi la div choice
 				document.querySelector(".lensAlert__validate").addEventListener("click", () => {
 					location.reload();
 				});
@@ -117,9 +113,7 @@ const addToBasket = (datas) => {
 			localStorage.setItem("basket", JSON.stringify(basket));
 			find(basket); // on passe le panier a la fonction de recherche des produits en double
 			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
-			let appearChoice = document.querySelector(".choice"); // on choisi la div choice
-			appearChoice.style.transitionDuration = "500ms";
-			appearChoice.style.transform = "scale(1)"; // on la fait apparaitre avec u transistion*/
+			document.querySelector(".choice").classList.replace("choice","appear"); // on choisi la div choice
 		});
 };
 

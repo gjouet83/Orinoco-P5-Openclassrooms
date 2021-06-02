@@ -1,0 +1,5 @@
+.appear {
+    @include popup;
+    transition-duration: 500ms;
+    transform: scale(1);
+}
