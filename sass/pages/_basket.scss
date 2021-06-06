@@ -311,6 +311,8 @@
 }
 .invalid {
 	border: 3px solid $red;
+    color: $red;
+    font-style: italic;
 	&::placeholder {
 		font-style: italic;
 		color: $red;
@@ -318,6 +320,7 @@
 }
 .valid {
     border: inherit;
+    font-style: inherit;
     &::placeholder {
         font-style: inherit;
         color: inherit;

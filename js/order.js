@@ -14,31 +14,32 @@ const basketToSend = () => {
 };
 
 // envoie des infos contact et produits au serveur
-fetch("http://localhost:3000/api/cameras/order", {
+const sendOrder = () => {
+	fetch("http://localhost:3000/api/cameras/order", {
 	method: "POST",
 	body: JSON.stringify({ contact, products }),
 	headers: {
 		"Content-Type": "application/json"
 	},
-}).then((response) => {
-	if (response.ok) {
-		console.log(response);
-		return response.json();
-	}
-}).then((order) => {
-	console.log(order);
-	displayOrder(order); //appel de la fonction principale
-});
+	}).then((response) => {
+		if (response.ok) {
+			return response.json();
+		}
+	}).then((order) => {
+		displayOrder(order); 
+		console.log(products)
+	});
+};
 
 // création du block pour l'affichage de la commande
 const displayOrderId = (order) => {
     document.getElementById("displayOrderId").textContent = "Commande n°" + order.orderId;
-}
+};
 
 // on ajoute le nom du client
 const displayCustumerName = (contact) => {
 	document.querySelector(".displayOrder__name").textContent = "MERCI! " + contact.firstName;
-}
+};
 
 //création de la vignette avec tous le éléments
 //createArea =>  helper dom.js
@@ -55,23 +56,14 @@ const createThumbnails = () => {
 	}
 };
 
-// fonction calcul prix total 
-const calculateTotalPriceOrder = (basket) => {
-    for (object of basket) {
-        console.log(basket);
-        totalPrice += (object.price * object.quantity);
-    }
-}
-
 // création du récap du prix total de la commande
 const createRecapOrder = (basket) => {
     // creatDiv ("type","id pour getElement", "class a ajouter")
     createDiv("div","displayOrder","displayOrder__recap");
     createArea ("span","MONTANT TOTAL DE LA COMMANDE","displayOrder__recap__label")
-    calculateTotalPriceOrder(basket);
+    calculateTotalPrice(basket);
     createArea ("span",formatPrice.format(totalPrice / 100),"displayOrder__recap__totalPrice")
-}
-
+};
 
 // fonction principale
 const displayOrder = (order) => {
@@ -85,7 +77,7 @@ const displayOrder = (order) => {
         localStorage.clear();
         document.location.href="index.html";
     });
-}
+};
 
-console.log(contact);
-console.log(products);
+// appel de la fonction principale
+sendOrder();

@@ -35,8 +35,7 @@ const deleteProduct = (item, index) => {
         }
         location.reload();
     })
-}
-
+};
 
 
 //création de la vignette avec tous le éléments
@@ -59,14 +58,6 @@ const createThumbnails = () => {
 	}
 };
 
-// fonction calcul prix total 
-const calculateTotalPrice = (basket) => {
-    for (object of basket) {
-        console.log(basket);
-        totalPrice += (object.price * object.quantity);
-    }
-}
-
 // création du récap du panier
 const createRecap = (basket) => {
     // creatDiv ("type","id pour getElement", "class a ajouter" et id, "titre")
@@ -79,11 +70,10 @@ const createRecap = (basket) => {
     createArea ("span",updateBasketChip(),"recap__element__basketQuantity")
     calculateTotalPrice(basket);
     createArea ("span",formatPrice.format(totalPrice / 100),"recap__element__totalPrice")
-}
+};
 
 // fonction principale d'affiche
 const displayObject = () => {
-    updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 	if (basket) {
         // suppression du background panier vide
 		let vanishEmptyBasket = document.querySelector(".emptyBasket");
@@ -100,16 +90,22 @@ const displayObject = () => {
         // création du boutton vider du panier
         createButton(".recap","basket__empty","VIDER mon panier","emptyBasket"); // helper dom.js
         // ecoute du boutton vider le panier 
-        document.getElementById("emptyBasket").addEventListener("click",() => {
-            localStorage.clear(); // on vide le localstorage
-            location.reload(); // rafraichir la page pour enlever les elements
-        });
-        btnDeleteList(); // listing des boutons delete qui appel ensuite la fonction delete
-        // ecoute du boutton valider pour affichage du formulaire
+        emptyBasket();
+        // listing des boutons delete qui appel ensuite la fonction delete
+        btnDeleteList(); 
+        // ecoute du boutton valider pour affichage du formulaire  
         document.getElementById("validateBasket").addEventListener("click",() => {
             createFormOrder();
-        });        
+        });     
 	}
+};
+
+// fonction vider le panier
+const emptyBasket = () => {
+    document.getElementById("emptyBasket").addEventListener("click",() => {
+        localStorage.clear(); // on vide le localstorage
+        location.reload(); // rafraichir la page pour enlever les elements
+    });
 };
 
 // création du formulaire de commande
@@ -131,72 +127,80 @@ const createFormOrder = () => {
         createButton(".form__order","form__order__validate","Commander","validateForm"); // helper dom.js
         window.location.href = "#form";
     }
-    createContact();
-}
+    validateContact();
+};
 
-// fonction création de l'objet contact
-const createContact = () => {
+// fonction validation des données saisie
+const validateContact = () => {
     document.getElementById("validateForm").addEventListener("click", (event) => {
-        let firstName = document.getElementById("firstName");
-        let lastName = document.getElementById("lastName");
-        let address = document.getElementById("address");
-        let city = document.getElementById("city");
-        let email = document.getElementById("email");
-        let contact = {
-            firstName: firstName.value,
-            lastName: lastName.value,
-            address: address.value,
-            city: city.value,
-            email: email.value,
-        }
         // reset de l'affichage de l'erreur
         document.getElementById("firstName").classList.remove("invalid");
         document.getElementById("lastName").classList.remove("invalid");
         document.getElementById("address").classList.remove("invalid");
         document.getElementById("city").classList.remove("invalid");
         document.getElementById("email").classList.remove("invalid");
+        // on recupère les données saisies
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        let address = document.getElementById("address").value;
+        let city = document.getElementById("city").value;
+        let email = document.getElementById("email").value;
         // on test si la saisie correspond au regex
-        if (!validateFirstName(contact)) {
+        if (!validateFirstName(firstName)) {
             isInvalid("firstName", event); // helpers dom.js
         } 
-        if (!validateLastName(contact)) {
+        if (!validateLastName(lastName)) {
             isInvalid("lastName", event); // helpers dom.js
         }  
-        if (!validateAddress(contact)) {
+        if (!validateAddress(address)) {
             isInvalid("address", event); // helpers dom.js
         }  
-        if (!validateCity(contact)) {
+        if (!validateCity(city)) {
             isInvalid("city", event); // helpers dom.js
         }  
-        if (!validateEmail(contact)) {
+        if (!validateEmail(email)) {
             isInvalid("email", event); // helpers dom.js    
-        }else {
-            localStorage.setItem("contact", JSON.stringify(contact));
+        }
+        if (validateFirstName(firstName) && validateLastName(lastName) && validateAddress(address) && validateCity(city) && validateEmail(email)) {
+            createContact(firstName, lastName, address, city, email);
         }
     });
-}
+};
 
 // regex
-const validateFirstName = (contact) => {
-    console.log(contact.firstName);
-    return /^[A-Za-zéèàçà'-\s]{3,15}$/.test(contact.firstName); 
-}
+const validateFirstName = (firstName) => {
+    console.log(firstName);
+    return /^[A-Za-zéèàçà'-\s]{3,15}$/.test(firstName); 
+};
 
-const validateLastName = (contact) => {
-    return /^[A-Za-zéèçà'-\s]{3,15}$/.test(contact.lastName);
-}
+const validateLastName = (lastName) => {
+    return /^[A-Za-zéèçà'-\s]{3,15}$/.test(lastName);
+};
 
-const validateAddress = (contact) => {
-    return /^[0-9]{0,6}[A-Za-zéèçà'-\s]{3,40}$/.test(contact.address);
-}
+const validateAddress = (address) => {
+    return /^[0-9]{0,6}[A-Za-zéèçà'-\s]{3,40}$/.test(address);
+};
 
-const validateCity = (contact) => {
-    return /^[A-Za-z'-\s]{3,15}$/.test(contact.city);
-}
+const validateCity = (city) => {
+    return /^[A-Za-z'-\s]{3,15}$/.test(city);
+};
 
-const validateEmail = (contact) => {
-    return /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/.test(contact.email);
-}
+const validateEmail = (email) => {
+    return /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/.test(email);
+};
+
+// fonction création de l'objet contact
+const createContact = (firstName, lastName, address, city, email) => {
+    let contact = {
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        city: city,
+        email: email,
+    }
+    localStorage.setItem("contact", JSON.stringify(contact));
+};
 
 // appel des fonctions principales
+updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
 displayObject(); // affichage des vignettes 

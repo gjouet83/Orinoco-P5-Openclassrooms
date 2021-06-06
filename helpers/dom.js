@@ -25,7 +25,7 @@ const createArea = (createElement, createTextNode, classList) => {
 	newDiv.appendChild(newElement);
 	newElement.appendChild(element);
 	newElement.classList.add(classList);
-}
+};
 
 // nom de l'apn
 const createName = (object, className) => {
@@ -45,7 +45,7 @@ const createNewForm = () => {
     document.getElementById("form").appendChild(newForm);
 	newForm.setAttribute("action","order.html");
 	newForm.classList.add("form__order");
-}
+};
 
 const createInputForm = (label, textnode, input, id, type, placeholder) => {
 	let newLabel = document.createElement(label);
@@ -63,7 +63,7 @@ const createInputForm = (label, textnode, input, id, type, placeholder) => {
 	newInput.setAttribute("required", "required");
 	newInput.setAttribute("placeholder", placeholder);
 	newInput.classList.add(id);
-}
+};
 
 // création de button valider
 const createButton = (classToAppend, classToAdd, value, name) => {
@@ -76,12 +76,10 @@ const createButton = (classToAppend, classToAdd, value, name) => {
 	validate.setAttribute("value", value);
 	validate.setAttribute("name", name);
 	validate.setAttribute("id", name);
-}
+};
 
 // creation d'erreur de saisie dans le formulaire
 const isInvalid = (inputId, event) => {
-	document.getElementById(inputId).value = "";
-	document.getElementById(inputId).setAttribute("placeholder", "Format Incorrect");
 	document.getElementById(inputId).classList.add("invalid");
 	event.preventDefault();
-}
+};
