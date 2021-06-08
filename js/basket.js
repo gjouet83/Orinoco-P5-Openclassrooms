@@ -1,7 +1,6 @@
 // déclarations des variables
 let basket = JSON.parse(localStorage.getItem("basket"));
 let totalPrice = 0;
-let deleteId = 0; 
 
 // boutton de suppression du produit
 const createDeleteIcon = () => {
@@ -22,7 +21,7 @@ const btnDeleteList = () => {
 	);
     deleteBtn.forEach(function(item, index){
         deleteProduct(item, index); // on récupère chaque item et son index de la liste et on les passent a la fonction deleteProduct
-    })
+    });
 };
 
 // fonction  suppression d'élements

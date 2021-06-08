@@ -1,5 +1,5 @@
 //récupération de l'id du produit sélectionné
-const getproductId = () => {
+const getProductId = () => {
 	let readId = window.location.search;
 	const id = readId.replace("?", "");
 	// récupération des données corespondant a l'id récupéré
@@ -135,4 +135,4 @@ const find = (basket) => {
 
 //Fonctions Principales
 updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
-getproductId();
+getProductId();

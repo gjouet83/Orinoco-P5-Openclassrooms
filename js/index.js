@@ -17,14 +17,6 @@ const getDatas = () => {
 
 
 // Fonctions créations des composants de la vignette
-const createProductName = (data) => {
-	let newName = document.createElement("h3");
-	let name = document.createTextNode(data.name);
-	newName.appendChild(name);
-	newDiv.appendChild(newName);
-	newName.classList.add("productList__element__name");
-};
-
 const createPicture = (data) => {
 	let newPicture = document.createElement("div");
 	let newFigure = document.createElement("figure");
@@ -65,7 +57,7 @@ const createThumbnails = (datas) => {
 	for (let data of datas) {
 		// creatDiv ("type","id pour getElement", "class a ajouter")
 		createDiv("div","productList", "productList__element");
-		createProductName(data);
+		createArea("h3",data.name,"productList__element__name");
 		createPicture(data);
 		createPrice(data);
 		createBtn(data);
