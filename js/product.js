@@ -102,7 +102,9 @@ const addToBasket = (datas) => {
 			document
 				.querySelector(".lensAlert__validate")
 				.addEventListener("click", () => {
-					location.reload();
+					document
+					.querySelector(".popupAppear")
+					.classList.replace("popupAppear", "lensAlert");
 				});
 			return;
 		}
