@@ -85,9 +85,9 @@ const displayObject = () => {
         //création du recap du panier
         createRecap(basket) // helpers dom.js
         // création du boutton de validation du panier
-        createButton(".recap","basket__validate","Valider mon panier","validateBasket"); // helper dom.js
+        createButton(".recap","basket__validate","button","Valider mon panier","validateBasket"); // helper dom.js
         // création du boutton vider du panier
-        createButton(".recap","basket__empty","VIDER mon panier","emptyBasket"); // helper dom.js
+        createButton(".recap","basket__empty","button","VIDER mon panier","emptyBasket"); // helper dom.js
         // ecoute du boutton vider le panier 
         emptyBasket();
         // listing des boutons delete qui appel ensuite la fonction delete
@@ -123,7 +123,7 @@ const createFormOrder = () => {
         createInputForm ("label","Ville","input","city","text","Paris"); // helper dom.js
         createInputForm ("label","E-mail","input","email","email","example@provider.com"); // helper dom.js
         // createValidateButton ("class pour getElement","class a ajouter a l'input", "texte", "nom")
-        createButton(".form__order","form__order__validate","Commander","validateForm"); // helper dom.js
+        createButton(".form__order","form__order__validate", "submit", "Commander","validateForm"); // helper dom.js
         window.location.href = "#form";
     }
     validateContact();

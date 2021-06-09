@@ -15,6 +15,7 @@ const basketToSend = () => {
 
 // envoie des infos contact et produits au serveur
 const sendOrder = () => {
+	basketToSend();
 	fetch("http://localhost:3000/api/cameras/order", {
 		method: "POST",
 		body: JSON.stringify({ contact, products }),
@@ -29,7 +30,6 @@ const sendOrder = () => {
 		})
 		.then((order) => {
 			displayOrder(order);
-			console.log(products);
 		});
 };
 
@@ -40,9 +40,9 @@ const displayOrderId = (order) => {
 };
 
 // on ajoute le nom du client
-const displayCustumerName = (contact) => {
+const displayCustumerName = (order) => {
 	document.querySelector(".displayOrder__name").textContent =
-		"MERCI! " + contact.firstName;
+		"MERCI! " + order.contact.firstName;
 };
 
 //création de la vignette avec tous le éléments
@@ -61,26 +61,25 @@ const createThumbnails = () => {
 };
 
 // création du récap du prix total de la commande
-const createRecapOrder = (basket) => {
+const createRecapOrder = (order) => {
 	// creatDiv ("type","id pour getElement", "class a ajouter")
 	createDiv("div", "displayOrder", "displayOrder__recap");
 	createArea("span","MONTANT TOTAL DE LA COMMANDE","displayOrder__recap__label");
-	calculateTotalPrice(basket);
+	calculateTotalPrice(order.products);
 	createArea("span",formatPrice.format(totalPrice / 100),"displayOrder__recap__totalPrice");
 };
 
 // fonction principale
 const displayOrder = (order) => {
-	basketToSend();
-	displayCustumerName(contact);
+	displayCustumerName(order); 
 	displayOrderId(order);
-	createRecapOrder(basket);
+	createRecapOrder(order);
 	createThumbnails();
-	createButton(".displayOrder", "displayOrder__btn", "Terminer", "Terminer");
+	createButton(".displayOrder", "displayOrder__btn","button","Terminer","Terminer");
+	localStorage.clear();
 	document
 		.querySelector(".displayOrder__btn")
 		.addEventListener("click", () => {
-			localStorage.clear();
 			document.location.href = "index.html";
 		});
 };
