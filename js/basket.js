@@ -11,7 +11,8 @@ const createDeleteIcon = () => {
 	newProductDelete.classList.add("basket__element__productDelete");
 	deleteIcon.classList.add("fas");
 	deleteIcon.classList.add("fa-trash-alt");
-    newProductDelete.setAttribute("aria-label", "bouton supprimer article")
+    newProductDelete.setAttribute("type", "button");
+    newProductDelete.setAttribute("aria-label", "bouton supprimer article");
 };
 
 //fonction creation de la liste des boutton supprimer
