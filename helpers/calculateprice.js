@@ -1,6 +1,6 @@
-// fonction calcul prix total 
+// fonction calcul prix total
 const calculateTotalPrice = (basket) => {
-    for (object of basket) {
-        totalPrice += (object.price * object.quantity);
-    }
+	for (object of basket) {
+		totalPrice += object.price * object.quantity;
+	}
 };

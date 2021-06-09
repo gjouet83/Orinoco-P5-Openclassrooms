@@ -10,11 +10,11 @@ const updateBasketChip = () => {
 	} else {
 		if (document.querySelector(".header__nav__basket--chipDisappear")) {
 			document
-			.querySelector(".header__nav__basket--chipDisappear")
-			.classList.replace(
-				"header__nav__basket--chipDisappear",
-				"header__nav__basket--chip"
-			);
+				.querySelector(".header__nav__basket--chipDisappear")
+				.classList.replace(
+					"header__nav__basket--chipDisappear",
+					"header__nav__basket--chip"
+				);
 		}
 		let totalQuantity = 0;
 		for (i = 0; i < basket.length; i++) {

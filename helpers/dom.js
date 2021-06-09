@@ -41,19 +41,19 @@ const createName = (object, className) => {
 
 // création d'input et label du formulaire
 const createNewForm = () => {
-    newForm = document.createElement("form");
-    document.getElementById("form").appendChild(newForm);
-	newForm.setAttribute("action","order.html");
+	newForm = document.createElement("form");
+	document.getElementById("form").appendChild(newForm);
+	newForm.setAttribute("action", "order.html");
 	newForm.classList.add("form__order");
 };
 
 const createInputForm = (label, textnode, input, id, type, placeholder) => {
 	let newLabel = document.createElement(label);
-    let textLabel = document.createTextNode(textnode);
-    let newInput = document.createElement(input);
+	let textLabel = document.createTextNode(textnode);
+	let newInput = document.createElement(input);
 	newForm.appendChild(newLabel);
-    newLabel.appendChild(textLabel);
-    newForm.appendChild(newInput);
+	newLabel.appendChild(textLabel);
+	newForm.appendChild(newInput);
 	newLabel.setAttribute("for", id);
 	newInput.setAttribute("id", id);
 	newLabel.classList.add("form__order__label");
@@ -67,12 +67,12 @@ const createInputForm = (label, textnode, input, id, type, placeholder) => {
 
 // création de button valider
 const createButton = (classToAppend, classToAdd, value, name) => {
-	let divToAppend = document.querySelector(classToAppend)
+	let divToAppend = document.querySelector(classToAppend);
 	let validate = document.createElement("input");
 	divToAppend.appendChild(validate);
 	validate.classList.add(classToAdd);
 	validate.classList.add("btn");
-	validate.setAttribute("type", "submit"); 
+	validate.setAttribute("type", "submit");
 	validate.setAttribute("value", value);
 	validate.setAttribute("name", name);
 	validate.setAttribute("id", name);

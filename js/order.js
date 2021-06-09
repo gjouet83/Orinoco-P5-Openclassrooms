@@ -16,67 +16,73 @@ const basketToSend = () => {
 // envoie des infos contact et produits au serveur
 const sendOrder = () => {
 	fetch("http://localhost:3000/api/cameras/order", {
-	method: "POST",
-	body: JSON.stringify({ contact, products }),
-	headers: {
-		"Content-Type": "application/json"
-	},
-	}).then((response) => {
-		if (response.ok) {
-			return response.json();
-		}
-	}).then((order) => {
-		displayOrder(order); 
-		console.log(products)
-	});
+		method: "POST",
+		body: JSON.stringify({ contact, products }),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then((response) => {
+			if (response.ok) {
+				return response.json();
+			}
+		})
+		.then((order) => {
+			displayOrder(order);
+			console.log(products);
+		});
 };
 
 // création du block pour l'affichage de la commande
 const displayOrderId = (order) => {
-    document.getElementById("displayOrderId").textContent = "Commande n°" + order.orderId;
+	document.getElementById("displayOrderId").textContent =
+		"Commande n°" + order.orderId;
 };
 
 // on ajoute le nom du client
 const displayCustumerName = (contact) => {
-	document.querySelector(".displayOrder__name").textContent = "MERCI! " + contact.firstName;
+	document.querySelector(".displayOrder__name").textContent =
+		"MERCI! " + contact.firstName;
 };
 
 //création de la vignette avec tous le éléments
 //createArea =>  helper dom.js
 const createThumbnails = () => {
 	for (object of basket) {
-        // creatDiv ("type","id pour getElement", "class a ajouter")
-		createDiv("div","displayOrder", "displayOrder__element"); // => helpers dom.js
-        // createArea ("type","texte a ajoute","class")ajoute a la div nouvellement créer
-		createArea ("label", "Qté", "displayOrder__element__quantityLabel"); // titre pour la quantité d'apn
-        createArea ("span",object.quantity,"displayOrder__element__quantity"); // quantité d'un meme produit avec la meme option
-        createArea ("span","Optique","displayOrder__element__lensLabel"); // titre pour l'optique
+		// creatDiv ("type","id pour getElement", "class a ajouter")
+		createDiv("div", "displayOrder", "displayOrder__element"); // => helpers dom.js
+		// createArea ("type","texte a ajoute","class")ajoute a la div nouvellement créer
+		createArea("label", "Qté", "displayOrder__element__quantityLabel"); // titre pour la quantité d'apn
+		createArea("span", object.quantity, "displayOrder__element__quantity"); // quantité d'un meme produit avec la meme option
+		createArea("span", "Optique", "displayOrder__element__lensLabel"); // titre pour l'optique
 		createName(object, "displayOrder__element__productName");
-		createArea ("span",object.option,"displayOrder__element__productLens"); // optique choisie;
+		createArea("span", object.option, "displayOrder__element__productLens"); // optique choisie;
 	}
 };
 
 // création du récap du prix total de la commande
 const createRecapOrder = (basket) => {
-    // creatDiv ("type","id pour getElement", "class a ajouter")
-    createDiv("div","displayOrder","displayOrder__recap");
-    createArea ("span","MONTANT TOTAL DE LA COMMANDE","displayOrder__recap__label")
-    calculateTotalPrice(basket);
-    createArea ("span",formatPrice.format(totalPrice / 100),"displayOrder__recap__totalPrice")
+	// creatDiv ("type","id pour getElement", "class a ajouter")
+	createDiv("div", "displayOrder", "displayOrder__recap");
+	createArea("span","MONTANT TOTAL DE LA COMMANDE","displayOrder__recap__label");
+	calculateTotalPrice(basket);
+	createArea("span",formatPrice.format(totalPrice / 100),"displayOrder__recap__totalPrice");
 };
 
 // fonction principale
 const displayOrder = (order) => {
-    basketToSend();
+	basketToSend();
 	displayCustumerName(contact);
-    displayOrderId(order);
+	displayOrderId(order);
 	createRecapOrder(basket);
-    createThumbnails();
-    createButton(".displayOrder","displayOrder__btn","Terminer","Terminer");
-    document.querySelector(".displayOrder__btn").addEventListener("click", () => {
-        localStorage.clear();
-        document.location.href="index.html";
-    });
+	createThumbnails();
+	createButton(".displayOrder", "displayOrder__btn", "Terminer", "Terminer");
+	document
+		.querySelector(".displayOrder__btn")
+		.addEventListener("click", () => {
+			localStorage.clear();
+			document.location.href = "index.html";
+		});
 };
 
 // appel de la fonction principale

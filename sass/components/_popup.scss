@@ -1,11 +1,11 @@
 .choice {
-    @include popup; // helpers.scss
+	@include popup; // helpers.scss
 }
 .lensAlert {
-    @include popup;
+	@include popup;
 }
 .popupAppear {
-    @include popup;
-    transition-duration: 500ms;
-    transform: scale(1);
+	@include popup;
+	transition-duration: 500ms;
+	transform: scale(1);
 }

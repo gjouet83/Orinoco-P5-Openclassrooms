@@ -4,17 +4,17 @@ const getProductId = () => {
 	const id = readId.replace("?", "");
 	// récupération des données corespondant a l'id récupéré
 	fetch("http://localhost:3000/api/cameras/" + id)
-	.then((response) => {
-		if (response.ok) {
-			return response.json();
-		}
-	})
-	.then((datas) => {
-		insertElements(datas);
-	})
-	.catch((error) => { 
-		alert("Erreur : " + error);
-	});
+		.then((response) => {
+			if (response.ok) {
+				return response.json();
+			}
+		})
+		.then((datas) => {
+			insertElements(datas);
+		})
+		.catch((error) => {
+			alert("Erreur : " + error);
+		});
 };
 
 //fonctions insertion des composants de la page produit
@@ -87,33 +87,39 @@ const createObject = (datas) => {
 		option: selectedLens,
 		price: datas.price,
 	};
-	return object; 
+	return object;
 };
 
 // Ajout au panier
 const addToBasket = (datas) => {
-	document
-		.getElementById("addToBasket")
-		.addEventListener("click", () => {
-			 let object = createObject(datas);
-			if (object.option === "") {  // on verifie qu'une optique a bien été sélectionnée
-				document.querySelector(".lensAlert").classList.replace("lensAlert","popupAppear"); // on fait apparaitre la div lensAlert en changant sa class
-				document.querySelector(".lensAlert__validate").addEventListener("click", () => {
+	document.getElementById("addToBasket").addEventListener("click", () => {
+		let object = createObject(datas);
+		if (object.option === "") {
+			// on verifie qu'une optique a bien été sélectionnée
+			document
+				.querySelector(".lensAlert")
+				.classList.replace("lensAlert", "popupAppear"); // on fait apparaitre la div lensAlert en changant sa class
+			document
+				.querySelector(".lensAlert__validate")
+				.addEventListener("click", () => {
 					location.reload();
 				});
-				return;
-			}
-			if (!JSON.parse(localStorage.getItem("basket"))) {  	//on verifie qu'il n'existe pas de panier
-				let basket = [];
-				localStorage.setItem("basket", JSON.stringify(basket));
-			}
-			basket = JSON.parse(localStorage.getItem("basket"));
-			basket.push(object);
+			return;
+		}
+		if (!JSON.parse(localStorage.getItem("basket"))) {
+			//on verifie qu'il n'existe pas de panier
+			let basket = [];
 			localStorage.setItem("basket", JSON.stringify(basket));
-			find(basket); // on passe le panier a la fonction de recherche des produits en double
-			updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
-			document.querySelector(".choice").classList.replace("choice","popupAppear"); // on fait apparaitre la div choice en changant sa class
-		});
+		}
+		basket = JSON.parse(localStorage.getItem("basket"));
+		basket.push(object);
+		localStorage.setItem("basket", JSON.stringify(basket));
+		find(basket); // on passe le panier a la fonction de recherche des produits en double
+		updateBasketChip(); // mise a jour de la pastille quantité du panier => basketChip.js
+		document
+			.querySelector(".choice")
+			.classList.replace("choice", "popupAppear"); // on fait apparaitre la div choice en changant sa class
+	});
 };
 
 // fonction de recherche et élimination des doublons. On augmente le produit restant de 1 quantité
@@ -123,9 +129,9 @@ const find = (basket) => {
 		pour ne pas additionner des produit avec des optiques différentes */
 		if (
 			basket[basket.length - 1].id === basket[i].id &&
-			basket[basket.length - 1].option ===basket[i].option 
+			basket[basket.length - 1].option === basket[i].option
 		) {
-			 // on calcul le nouveau prix
+			// on calcul le nouveau prix
 			basket[i].quantity++; // on incrémente la quantité du produit trouvé de 1
 			basket.pop(); // on supprime le dernier produit
 			localStorage.setItem("basket", JSON.stringify(basket)); // on stocke le tableau

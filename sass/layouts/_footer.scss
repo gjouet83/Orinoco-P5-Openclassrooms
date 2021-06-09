@@ -38,7 +38,7 @@
 		display: flex;
 		position: absolute;
 		right: 0;
-		@media all and (min-width: 768px){
+		@media all and (min-width: 768px) {
 			right: 15vw;
 		}
 		&__elements {
