@@ -30,6 +30,9 @@ const sendOrder = () => {
 		})
 		.then((order) => {
 			displayOrder(order);
+		})
+		.catch((error) => {
+			alert("Erreur : " + error);
 		});
 };
 
