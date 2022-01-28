@@ -5,7 +5,7 @@ Projet n°5 du parcours développeur web chez OpenClassrooms qui a pour objectif
 
 ### Prérequis
 
-- Avoir Node et npm installer localement sur la machine
+- Avoir Node et npm installés localement sur la machine
 
 puis
 
