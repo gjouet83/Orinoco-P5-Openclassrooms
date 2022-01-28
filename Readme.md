@@ -3,6 +3,12 @@ Projet n°5 du parcours développeur web chez OpenClassrooms qui a pour objectif
 
 ## Pour le Backend
 
+### Prérequis
+
+- Avoir Node et npm installer localement sur la machine
+
+puis
+
 1. Clonez le repository suivant: [JWP5](https://github.com/gjouet83/JWDP5.git)
 2. Ouvrez un terminal et allez dans le répertoire qui vient d'être cloner
 3. Executez les commandes suivantes: 
